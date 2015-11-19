@@ -1,0 +1,10 @@
+INDEX VERSION 1.127+C:\Users\3075 Programming\Documents\GitHub\Falafel-2015\.metadata\.plugins\org.eclipse.jdt.core
+2006644155.index
+1642629014.index
+202904382.index
+4133831525.index
+1589537640.index
+71698844.index
+2689061861.index
+4247270281.index
+2921179834.index

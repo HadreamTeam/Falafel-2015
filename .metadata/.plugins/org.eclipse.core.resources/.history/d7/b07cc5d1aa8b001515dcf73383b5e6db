@@ -1,0 +1,10 @@
+package libPurple;
+
+public class utils
+{
+	public static boolean prettyEqual(double x, double y, double dif)
+	{
+		assert dif > 0;
+		return Math.abs(x - y) <= dif;
+	}
+}

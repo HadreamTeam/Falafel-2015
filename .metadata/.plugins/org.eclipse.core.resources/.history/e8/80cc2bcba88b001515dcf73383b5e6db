@@ -1,0 +1,7 @@
+package org.usfirst.frc.team3075.robot.commands;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
+
+public class Shoot extends CommandGroup {
+	
+}

@@ -1,0 +1,5 @@
+package org.usfirst.frc.team3075.robot.commands;
+
+public class ShootingSpeed {
+	public static final double shootingRate = 7200;
+}

@@ -1,0 +1,40 @@
+package org.usfirst.frc.team3075.robot;
+
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Victor;
+
+/**
+ * The RobotMap is a mapping from the ports sensors and actuators are wired into
+ * to a variable name. This provides flexibility changing wiring, makes checking
+ * the wiring easier and significantly reduces the number of magic numbers
+ * floating around.
+ */
+public class RobotMap {
+	
+	public static Victor rearLeft;
+	public static Victor frontLeft;
+	public static Victor rearRight;
+	public static Victor frontRight;
+	public static RobotDrive drive;
+	
+	
+	public static void init()
+	{
+		rearLeft = new Victor(1);
+		rearLeft = new Victor(0);
+		frontLeft = new Victor(0);
+		rearRight = new Victor(2);
+		frontRight = new Victor(3);
+		
+		drive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
+		
+		drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+		drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+		
+		drive.setSafetyEnabled(true);
+        drive.setExpiration(0.1);
+        drive.setSensitivity(0.5);
+        drive.setMaxOutput(1.0);
+	}
+	
+}

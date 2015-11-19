@@ -1,0 +1,81 @@
+package org.usfirst.frc.team3075.robot;
+
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+
+/**
+ * The RobotMap is a mapping from the ports sensors and actuators are wired into
+ * to a variable name. This provides flexibility changing wiring, makes checking
+ * the wiring easier and significantly reduces the number of magic numbers
+ * floating around.
+ */
+public class RobotMap {
+    // For example to map the left and right motors, you could define the
+    // following variables to use with your drivetrain subsystem.
+    // public static int leftMotor = 1;
+    // public static int rightMotor = 2;
+    
+    // If you are using multiple modules, make sure to define both the port
+    // number and the module. For example you with a rangefinder:
+    // public static int rangefinderPort = 1;
+    // public static int rangefinderModule = 1;
+	
+	public static Victor v0; 
+	public static Victor v1; 
+	public static Victor v2; 
+	public static Victor v3; 
+	public static RobotDrive drive;
+	public static CANTalon t2;
+	public static CANTalon t2slave;
+	public static CANTalon middle;
+	public static CANTalon middleS;
+	public static Encoder e0;
+	public static Encoder e1;
+	public static EncodingType et = Encoder.EncodingType.k4X;
+	public static final double wheelRad = 0.5;
+	
+	public static DoubleSolenoid leonid = new DoubleSolenoid(0, 6);
+	public static DoubleSolenoid liftSolenoid = new DoubleSolenoid(1, 5);	
+	
+	public static void init()
+	{
+		v0 = new Victor(3);
+		v1 = new Victor(0); 
+		v2 = new Victor(1); 
+		v3 = new Victor(2);
+		drive = new RobotDrive(v0, v1, v2, v3);
+		e0 = new Encoder(1,0,false,et);
+        e1 = new Encoder(2,3,true,et);
+		
+		drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+		drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+		
+		drive.setSafetyEnabled(true);
+        drive.setExpiration(0.1);
+        drive.setSensitivity(0.5);
+        drive.setMaxOutput(1.0);
+        
+        e0.setDistancePerPulse((Math.PI*wheelRad)/e0.getEncodingScale());
+        e1.setDistancePerPulse((Math.PI*wheelRad)/e1.getEncodingScale());
+        
+        t2 = new CANTalon(2);
+        t2slave = new CANTalon(3);
+        t2slave.changeControlMode(CANTalon.ControlMode.Follower); //dont h8 if u r m8
+        t2slave.set(t2.getDeviceID()); //such good much wow very long
+        
+        middle = new CANTalon(4);
+        middle.changeControlMode(CANTalon.ControlMode.PercentVbus);
+        middleS = new CANTalon(5);
+        middleS.changeControlMode(CANTalon.ControlMode.Follower); //dont h8 if u r m8
+        middleS.set(middle.getDeviceID()); //such good much wow very long
+	}
+	
+	public void save()
+	{
+		
+	}
+}

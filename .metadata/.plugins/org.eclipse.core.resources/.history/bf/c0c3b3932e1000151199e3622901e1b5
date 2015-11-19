@@ -1,0 +1,65 @@
+package org.usfirst.frc.team3075.robot.commands;
+
+import libPurple.FeedbackNode;
+
+import org.usfirst.frc.team3075.robot.Robot;
+import org.usfirst.frc.team3075.robot.RobotMap;
+import org.usfirst.frc.team3075.robot.subsystems.ForkLift;
+
+import sun.util.logging.resources.logging;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+public class JoystickForkLift extends Command {
+
+	public JoystickForkLift()
+	{
+		requires(Robot.forkLift);
+	}
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+
+	}
+
+	
+	@Override
+	protected void execute() {
+			// TODO Auto-generated method stub
+		double axis = Robot.oi.getJoystickSystem().yValue();
+//		Robot.forkLift.setSpeed(axis);
+//		SmartDashboard.putString("Joystick", "contol");
+//		if(axis != 0)
+//		{
+			Robot.forkLift.setSpeed(axis);
+	//		Robot.forkLift.save();
+	//	}
+//		else
+//		{
+//			Robot.forkLift.setPosition(FeedbackNode.get(Robot.forkLift.toString()+"p"));
+//			//SmartDashboard.putString("do", "nothing");
+//		}
+
+		SmartDashboard.putNumber("Claw P", Robot.forkLift.getPosition());
+
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

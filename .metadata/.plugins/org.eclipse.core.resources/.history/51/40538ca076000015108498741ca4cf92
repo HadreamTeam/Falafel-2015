@@ -1,0 +1,55 @@
+package org.usfirst.frc.team3075.robot.commands;
+
+import org.usfirst.frc.team3075.robot.Robot;
+import org.usfirst.frc.team3075.robot.RobotMap;
+import org.usfirst.frc.team3075.robot.subsystems.ForkLift;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+public class JoystickForkLift extends Command {
+
+	public JoystickForkLift()
+	{
+		requires(Robot.forkLift);
+	}
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void execute() {
+			// TODO Auto-generated method stub
+			System.out.println("hello");
+		double axis = Robot.oi.getJoystickSystem().xValue();
+		if(axis != 0)
+		{
+			Robot.forkLift.setSpeed(axis);
+		}
+		else
+		{
+			Robot.forkLift.setPosition(Robot.forkLift.getPosition());
+		}
+
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

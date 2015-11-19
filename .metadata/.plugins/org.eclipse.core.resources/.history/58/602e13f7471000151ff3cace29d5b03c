@@ -1,0 +1,151 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.Joystick;
+
+public class Joystick3075 extends Joystick{
+	double deadBand = 0;
+	double motorBound = 0;
+	double accelLimit = 1;
+	double[] axis = new double[3];
+	public Joystick3075(int port) {
+		super(port);
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setDeadBand(double deadBand)
+	{
+		if(deadBand < 0 || deadBand > 1) deadBand = 0; 
+		this.deadBand = deadBand;
+	}
+	
+	public void setMotorBound(double motorBound)
+	{
+		if(motorBound < 0 || motorBound > 1) motorBound = 0; 
+		this.motorBound = motorBound;
+	}
+	
+	public void setAccelLimit(double accelLimit)
+	{
+		if(accelLimit < 0 || accelLimit > 1) accelLimit = 0; 
+		this.accelLimit = accelLimit;
+	}
+	
+//	public double xValue()
+//	{
+//		return getMotorBound(getDeadBand(super.getX()));
+//	}
+//	
+//	public double yValue()
+//	{
+//		return getMotorBound(getDeadBand(super.getY()));
+//	}
+//	
+//	public double getValue(int axisNum)
+//	{
+//		return getMotorBound(getDeadBand(super.getRawAxis(axisNum)));
+//	}
+	
+	public double getValue(int axisNum)
+	{
+		axis[axisNum] = super.getRawAxis(axisNum);
+		axis[axisNum] = getDeadBand(axis[axisNum]);
+		axis[axisNum] = getMotorBound(axis[axisNum]);
+		axis[axisNum] = getAccelLimit(axisNum);
+		return axis[axisNum];
+	}
+	
+	public double xValue()
+	{
+		axis[0] = super.getX();
+		axis[0] = getDeadBand(axis[0]);
+		axis[0] = getMotorBound(axis[0]);
+		axis[0] = getAccelLimit(axis[0], FeedbackNode.get(this + "0"));
+		return axis[0];
+	}
+	
+	public double yValue()
+	{
+		axis[1] = super.getY();
+		axis[1] = getDeadBand(axis[1]);
+		axis[1] = getMotorBound(axis[1]);
+		axis[1] = getAccelLimit(axis[1], FeedbackNode.get(this + "1"));
+		return axis[1];
+	}
+	
+	public double zValue()
+	{
+		axis[2] = super.getZ();
+		axis[2] = getDeadBand(axis[2]);
+		axis[2] = getMotorBound(axis[2]);
+		axis[2] = getAccelLimit(axis[2], FeedbackNode.get(this + "2"));
+		return axis[2];
+	}
+	
+	public double getDeadBand(double axis)
+	{
+		return Math.abs(axis) < deadBand ? 0 : Math.signum(axis)*((Math.abs(axis)-deadBand)/(1-deadBand));
+	}
+	
+	public double getDeadBand(double axis, double db)
+	{
+		return Math.abs(axis) < db ? 0 : Math.signum(axis)*((Math.abs(axis)-db)/(1-db));
+	}
+	
+	public double getMotorBound(double axis)
+	{
+//		axis = getDeadBand(axis);
+		return axis == 0 ? 0 : Math.signum(axis)*(Math.abs(axis)*(1-motorBound) + motorBound);
+	}
+	
+	public double getMotorBound(double axis, double mb)
+	{
+//		axis = getDeadBand(axis);
+		return axis == 0 ? 0 : Math.signum(axis)*(Math.abs(axis)*(1-mb) + mb);
+	}
+	
+	public double getAccelLimit(double axis, double preAxis)
+	{
+		return utils.inRange(axis, preAxis, accelLimit) ? axis : 
+			preAxis + Math.signum(axis-preAxis)*accelLimit;
+	}
+	
+	public double getAccelLimit(double axis, double preAxis, double al)
+	{
+		return utils.inRange(axis, preAxis, al) ? axis : 
+			preAxis + Math.signum(axis-preAxis)*al;
+	}
+	
+	public double getAccelLimit(int axisNum)
+	{
+		return utils.inRange(super.getRawAxis(axisNum), FeedbackNode.get(this.toString() + "" + axisNum), accelLimit) ? axis[axisNum] : 
+			FeedbackNode.get(this.toString() + "" + axisNum) + Math.signum(axis[axisNum]-FeedbackNode.get(this + "" + axisNum))*accelLimit;
+	}
+	
+	public double getAccelLimit(int axisNum, double al)
+	{
+		return utils.inRange(super.getRawAxis(axisNum), FeedbackNode.get(this.toString() + "" + axisNum), al) ? axis[axisNum] : 
+			FeedbackNode.get(this.toString() + "" + axisNum) + Math.signum(axis[axisNum]-FeedbackNode.get(this + "" + axisNum))*al;
+	}
+	
+	public void update(){}
+	
+	public void save()
+	{
+		FeedbackNode.set(this.toString() + "0", axis[0]); //x
+		FeedbackNode.set(this.toString() + "1", axis[1]); //y
+	}
+//	public double getValueThrough(double axis, Point p)
+//	{
+//		return axis*axis*(p.getY()-p.getX())/(p.getX()*p.getX()-p.getX()) +
+//				axis*(p.getX()*p.getX()-p.getY())/(p.getX()*p.getX()-p.getX());
+//	}
+//	
+//	public double getValueThrough(double axis, Point p, double slope)
+//	{
+//		double P1 = (slope*(p.getX()-1)+2*(p.getX()-p.getY()))/p.getX()/(p.getX()-1)/(p.getX()-2);
+//		double P2 = slope/p.getX()/2 - 1.5*P1;
+//		double P3 = p.getY() - p.getX()*(P1*p.getX()+P2);
+//		return axis*axis*axis*P1 + axis*axis*P2 + axis*P3;
+//	}
+	
+}
