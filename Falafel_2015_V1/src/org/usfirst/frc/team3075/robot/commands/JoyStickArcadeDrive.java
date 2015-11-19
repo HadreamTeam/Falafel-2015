@@ -21,7 +21,7 @@ public class JoyStickArcadeDrive extends Command {
 	protected void execute() {
 		
 		Robot.drive.arcadeDrive(OI.driveStick.axisGet(1), OI.driveStick.axisGet(0));
-		
+	
 		// TODO Auto-generated method stub
 		
 	}
@@ -42,10 +42,6 @@ public class JoyStickArcadeDrive extends Command {
 	protected void interrupted() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public static void main(String[] args) {
-		OI.init();
 	}
 	
 }

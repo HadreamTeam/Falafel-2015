@@ -1,7 +1,5 @@
 package libPurple;
 
-import org.usfirst.frc.team3075.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,7 +25,6 @@ public class Solenoid3075 extends DoubleSolenoid{
 	{
 		return new OpenClose(this, false);
 	}
-
 }
 
 

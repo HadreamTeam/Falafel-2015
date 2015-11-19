@@ -28,10 +28,12 @@ public class OI {
 	 public static Encoder conveyorEncoder; 
 	 public static Encoder shooterLeftEncoder;
 	 public static Encoder shooterRightEncoder;
-
+	 public static Encoder driveLeftEncoder;
+	 public static Encoder driveRightEncoder;
 	 
 	 //Constants
 	 public static final double kConveyorDiameter = 137; 
+	 public static final double kDriveDiameter = 15;
 	 
 	 public static void init() {
 		 
@@ -61,6 +63,11 @@ public class OI {
 		 shooterLeftEncoder.setDistancePerPulse(90);
 		 shooterRightEncoder = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
 		 shooterRightEncoder.setDistancePerPulse(90);
+		 
+		 driveLeftEncoder = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
+		 driveLeftEncoder.setDistancePerPulse(kDriveDiameter * Math.PI / 4);
+		 driveRightEncoder = new Encoder(8, 9, true, Encoder.EncodingType.k4X);
+		 driveLeftEncoder.setDistancePerPulse(kDriveDiameter * Math.PI / 4);
 		 
 	 }
 

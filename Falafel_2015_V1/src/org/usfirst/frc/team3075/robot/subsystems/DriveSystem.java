@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3075.robot.subsystems;
 
+import org.usfirst.frc.team3075.robot.OI;
 import org.usfirst.frc.team3075.robot.RobotMap;
 import org.usfirst.frc.team3075.robot.commands.JoyStickArcadeDrive;
 
@@ -17,23 +18,33 @@ public class DriveSystem extends Subsystem{
 		RobotMap.drive.arcadeDrive(x, y);
 	}
 	
-	public double getDistTotal()
+	public double getDistAverage()
 	{
-		return 0;
+		return (getDistLeft() + getDistRight()) / 2;
 	}
 	
 	public double getDistRight()
 	{
-		return 0;
+		return OI.driveRightEncoder.getDistance();
 	}
 	
 	public double getDistLeft()
 	{
-		return 0;
+		return OI.driveLeftEncoder.getDistance();
 	}
 	
 	public double getAngle()
 	{
-		return 0;
+		return getAngleRight() + getAngleLeft();
+	}
+	
+	private double getAngleRight()
+	{
+		return 1 * OI.driveRightEncoder.getDistance() / RobotMap.robotWidth * 360 / (2 * Math.PI);
+	}
+	
+	private double getAngleLeft()
+	{
+		return -1 * OI.driveLeftEncoder.getDistance() / RobotMap.robotWidth * 360 / (2 * Math.PI);
 	}
 }

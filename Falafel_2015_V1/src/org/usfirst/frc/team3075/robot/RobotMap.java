@@ -27,9 +27,15 @@ public class RobotMap {
 	//Constants
 	public static final double slotLength = 0.22;
 	
+	public static final double robotWidth = 0.8;
+	
 	public static final double kpConveyor = 1.5;
 	
 	public static final double kpShooter = 10;
+	
+	public static final double kpDrive = 10;
+	
+	public static final double kpTurn = 10;
 	
 	public static void init()
 	{

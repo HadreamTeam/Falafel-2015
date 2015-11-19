@@ -9,21 +9,15 @@ public class utils
 		assert dif > 0;
 		return Math.abs(x - y) < dif;
 	}
-	//x is the joystic current
-	//y is the joystick speed recives 
-	// exe is the 
-//	public static double accelimit(double x,double y,double exe)
-//	{
-//		if(x<y)
-//		{
-//			
-//		}
-//		
-//		
-//	}
+	
 	public static double accellimit(double current, double requested, double accellimit)
 	{
-		return + (Math.signum(requested - current) * Math.min(accellimit, Math.abs(current-requested)));
+		return + (Math.signum(requested - current) * Math.min(accellimit, Math.abs(current - requested)));
+	}
+	
+	public static double motorBound(double x, double MB)
+    {
+    	return Math.signum(x)* (Math.abs(x)-(MB*Math.abs(x))+MB);    	
 	}
 	
 	
