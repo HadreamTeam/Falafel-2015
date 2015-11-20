@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
     	RobotMap.init();
     	drive = new DriveSystem();
     	shooter = new Shooter();
-    	conveyor = new Conveyor();
+    	conveyor = new Conveyor(RobotMap.kpConveyor, RobotMap.kiConveyor, RobotMap.kdConveyor);
     	
     	
         // instantiate the command used for the autonomous period

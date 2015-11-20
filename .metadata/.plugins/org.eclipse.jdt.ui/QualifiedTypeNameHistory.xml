@@ -41,11 +41,15 @@
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.GearUp"/>
 <fullyQualifiedTypeName name="LibPurple.Solenoid3075"/>
 <fullyQualifiedTypeName name="LibPurple.DoubleSolenoid3075"/>
+<fullyQualifiedTypeName name="libPurple.utils"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.command.PIDSubsystem"/>
+<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.RobotMap"/>
+<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.Wait"/>
+<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.OI"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.Robot"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Victor"/>
-<fullyQualifiedTypeName name="libPurple.utils"/>
+<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.subsystems.TwoMotorPID"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Encoder"/>
-<fullyQualifiedTypeName name="java.lang.Math"/>
-<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.OI"/>
-<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.RobotMap"/>
+<fullyQualifiedTypeName name="libPurple.Victor3075"/>
 </qualifiedTypeNameHistroy>

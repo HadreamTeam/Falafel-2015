@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Victor;
 
 public class Victor3075 extends Victor {
     private int inverted = 1;
-    private final double MB = 0.1;
+    private final double MB = 0;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 

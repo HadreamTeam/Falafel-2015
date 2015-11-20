@@ -8,9 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 
 public class MoveOneSlot extends Command {
-	private double initialValue;
-	private double distance;
-
+	
     public MoveOneSlot() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -18,25 +16,26 @@ public class MoveOneSlot extends Command {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-    	initialValue = OI.conveyorEncoder.getDistance();
+    protected void initialize() 
+    {
+//    	OI.conveyorEncoder.reset();
+    	Robot.conveyor.enable();
+    	Robot.conveyor.setSetpoint(OI.conveyorEncoder.getDistance() + RobotMap.slotLength);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	//Proportional motor speed
-    	distance = Robot.conveyor.rotationCheck() - initialValue;
-    	Robot.conveyor.setSpeed((RobotMap.slotLength - distance) / RobotMap.kpConveyor);
+    	//Proportional motor speeds
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return distance >= RobotMap.slotLength;
+        return Robot.conveyor.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.conveyor.enable();
     }
 
     // Called when another command which requires one or more of the same

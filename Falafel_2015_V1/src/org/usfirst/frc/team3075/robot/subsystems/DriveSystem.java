@@ -15,7 +15,6 @@ public class DriveSystem extends Subsystem{
 	 
 	public void arcadeDrive(double y, double x)
 	{
-		RobotMap.drive.arcadeDrive(x, y);
 	}
 	
 	public double getDistAverage()

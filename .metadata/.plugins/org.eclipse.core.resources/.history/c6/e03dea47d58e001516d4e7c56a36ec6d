@@ -1,0 +1,33 @@
+package org.usfirst.frc.team3075.robot.subsystems;
+
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
+
+/**
+ *
+ */
+public class Conveyor extends PIDSubsystem {
+
+    
+    
+    public Conveyor(double p, double i, double d) {
+		super(p, i, d);
+		// TODO Auto-generated constructor stub
+	}
+
+	public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    protected double returnPIDInput() {
+        // Return your input value for the PID loop
+        // e.g. a sensor, like a potentiometer:
+        // yourPot.getAverageVoltage() / kYourMaxVoltage;
+    	return 0.0;
+    }
+    
+    protected void usePIDOutput(double output) {
+        // Use output to drive your system, like a motor
+        // e.g. yourMotor.set(output);
+    }
+}
