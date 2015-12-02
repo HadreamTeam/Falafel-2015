@@ -8,11 +8,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Shoot extends CommandGroup {
     
     public  Shoot() {
+    	
+		addParallel(new Prepare2Shoot());
+
         // Add Commands here:
     	for(int i =0; i<5;i++)
     	{
-    		addSequential(new Prepare2Shoot(true));
-    		addParallel(new Prepare2Shoot(false));
+    		
     		addSequential(new MoveOneSlot());
     	}
         // these will run in order.

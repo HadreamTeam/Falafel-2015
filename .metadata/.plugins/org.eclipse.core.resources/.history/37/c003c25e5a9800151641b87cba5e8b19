@@ -1,0 +1,11 @@
+package libPurple;
+
+public class EncoderTalon3075 {
+	
+	CANTalon3075 myTalon;
+	
+	public EncoderTalon3075(CANTalon3075 talon)
+	{
+		myTalon = talon;
+	}
+}

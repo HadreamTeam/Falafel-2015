@@ -25,11 +25,12 @@ public class ManualShooter extends Command {
     {
     	value = 0;
     }
+    
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	value = ((-OI.systemStick.axisGet(2)) + 1) / 2; // change the value from -1 ~ 1 to 0 ~ 1
+    	value = ((-OI.systemStick.getRawAxis(2)) + 1) / 2; // change the value from -1 ~ 1 to 0 ~ 1
     	Robot.shooter.setWheelsSpeed(value);
     }
 

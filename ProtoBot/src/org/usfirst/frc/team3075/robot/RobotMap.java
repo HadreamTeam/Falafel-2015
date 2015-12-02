@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3075.robot;
 
+import LibPurple.CANTalon3075;
 import LibPurple.DoubleSolenoid3075;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -22,23 +24,27 @@ public class RobotMap {
 	public static RobotDrive drive;
 	
 	//Shooting system
-	public static Victor leftWheel;
-	public static Victor rightWheel;
+//	public static CANTalon3075 leftWheel;
+//	public static CANTalon3075 rightWheel;
+	public static CANTalon leftWheel;
+	public static CANTalon rightWheel;
 
 	//Conveyor system
-	public static Victor conveyorMotor;
-	
-	public static Compressor c;
+	public static CANTalon3075 conveyorMotor;
 	
 	public static DoubleSolenoid3075 grabber;
 	public static DoubleSolenoid3075 shifter;
+	
+	//Run period in milliseconds.
+	public static final int runPeriod = 20;
+	
 	public static void init()
 		{
 			//Initialize driving motors
-			rearLeft = new Victor(1);
+			rearLeft = new Victor(3);
 			frontLeft = new Victor(0);
-			rearRight = new Victor(2);
-			frontRight = new Victor(3);
+			rearRight = new Victor(1);
+			frontRight = new Victor(2);
 			
 			drive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 			
@@ -52,19 +58,18 @@ public class RobotMap {
 	        drive.setMaxOutput(1.0);
 	        
 	        //Initialize shooting system
-	        leftWheel = new Victor(5);
-	        rightWheel = new Victor(6);
+//	        leftWheel = new CANTalon3075(0);
+//	        leftWheel = new CANTalon3075(2);
+//	        rightWheel = new CANTalon3075(2, leftWheel, true);
+	        leftWheel = new CANTalon(0);
+	        rightWheel = new CANTalon(2);
 	        
 	        //Wannabe conveyer
-	        conveyorMotor = new Victor(4);
+	        conveyorMotor = new CANTalon3075(1);
 	        
-	        c = new Compressor(0);
-	        c.setClosedLoopControl(true);
-	        c.start();
-	        
-	        grabber = new DoubleSolenoid3075(1, 0);
+	        grabber = new DoubleSolenoid3075(4, 5);
 
-	        shifter = new DoubleSolenoid3075(4, 5);
+	        shifter = new DoubleSolenoid3075(0, 1);
 	        
 	        grabber.clearAllPCMStickyFaults();
 	        

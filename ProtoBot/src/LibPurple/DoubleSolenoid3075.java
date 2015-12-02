@@ -34,25 +34,23 @@ public class DoubleSolenoid3075 extends DoubleSolenoid{
 
 class Toggle extends Command {
 
-	DoubleSolenoid mySol;
-	boolean exe = false;
+	DoubleSolenoid solenoid;
 	
 	public Toggle(DoubleSolenoid ds)
 	{
-		mySol = ds;
+		solenoid = ds;
 	}
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	mySol.set(mySol.get() == DoubleSolenoid.Value.kForward ? 
+    	solenoid.set(solenoid.get() == DoubleSolenoid.Value.kForward ? 
     			DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
-    	exe = true;
     }
 
     protected boolean isFinished() {
-        return exe;
+        return true;
     }
 
     protected void end() {
@@ -64,11 +62,11 @@ class Toggle extends Command {
 
 class OpenClose extends Command {
 
-	DoubleSolenoid mySol;
+	DoubleSolenoid solenoid;
 	boolean open;
 	
-    public OpenClose(DoubleSolenoid ds, boolean open) {
-    	mySol = ds;
+    public OpenClose(DoubleSolenoid doubleSolenoid, boolean open) {
+    	solenoid = doubleSolenoid;
     	this.open = open;
     }
 
@@ -76,7 +74,7 @@ class OpenClose extends Command {
     }
 
     protected void execute() {
-    	mySol.set(open ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
+    	solenoid.set(open ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
     }
 
     protected boolean isFinished() {

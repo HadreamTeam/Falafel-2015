@@ -7,7 +7,6 @@ import org.usfirst.frc.team3075.robot.Robot;
   
 
 public class JoyStickArcadeDrive extends Command {
-	private final double exe=0.3;
 	public JoyStickArcadeDrive() {
 		
 		requires(Robot.drive);
@@ -21,7 +20,7 @@ public class JoyStickArcadeDrive extends Command {
 	@Override
 	protected void execute() {
 		
-		Robot.drive.arcadeDrive(OI.driveStick.axisGet(1), OI.driveStick.axisGet(0));
+		Robot.drive.arcadeDrive(-OI.driveStick.axisGet(1), OI.driveStick.axisGet(0));
 		
 		// TODO Auto-generated method stub
 		

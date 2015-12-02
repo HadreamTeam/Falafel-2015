@@ -1,0 +1,36 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.Joystick;
+
+public class JoyStick3075 extends Joystick {
+
+	public static double deadband = 0.1;
+	public static int power = 1;
+	
+	public JoyStick3075(int port) {
+		super(port);
+	}
+
+	public double xGet()
+	{
+		//The calculation of Deadeadbandand.
+		return utils.deadband(super.getRawAxis(0), deadband);
+	}
+	
+	public double yGet()
+	{
+		return utils.deadband(super.getRawAxis(1), deadband);
+	}
+	
+	public double axisGet(int axis)
+	{
+		//The calculation of Deadeadbandand.
+		return utils.deadband(super.getRawAxis(axis), deadband);
+	}
+	
+	public void setDeadeadbandand(double newDeadband)
+	{
+		deadband = newDeadband;
+	}
+
+}

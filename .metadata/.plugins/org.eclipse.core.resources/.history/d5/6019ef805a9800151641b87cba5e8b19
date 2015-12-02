@@ -1,0 +1,27 @@
+package libPurple;
+
+public class EncoderTalon3075 {
+	
+	CANTalon3075 myTalon;
+	double dpp = 1;
+	
+	public EncoderTalon3075(CANTalon3075 talon)
+	{
+		myTalon = talon;
+	}
+	
+	public double getRate()
+	{
+		
+	}
+	
+	public double getDistance()
+	{
+		
+	}
+	
+	public void setDistancePerPulse(double dpp)
+	{
+		this.dpp = dpp;
+	}
+}

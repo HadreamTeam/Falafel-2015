@@ -2,30 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Object" key="selection"/>
+		<item value="getRate" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="SuperObject"/>
-			<item value="Double"/>
-			<item value="DriveSystem"/>
-			<item value="DriveSys"/>
-			<item value="driveSystem"/>
-			<item value="Autonomous"/>
-			<item value="leonid"/>
+			<item value="getRate"/>
+			<item value="kExponantial"/>
+			<item value="mySol"/>
+			<item value="current"/>
+			<item value="requested"/>
+			<item value="x"/>
+			<item value="db"/>
 			<item value="PrettyEqual"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Constants.kExponantial"/>
+			<item value="solenoid"/>
+			<item value="currentValue"/>
+			<item value="lastValue"/>
+			<item value="value"/>
+			<item value="deadband"/>
 			<item value="Object"/>
 			<item value="driveSystem"/>
-			<item value="DriveSys"/>
-			<item value="Autonomous1"/>
-			<item value="liftSolenoid"/>
-			<item value="isNear"/>
-			<item value="&quot;&quot; + axisNum"/>
-			<item value="FeedbackNode.get(this + (String) axisNum)"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

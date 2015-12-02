@@ -1,26 +1,21 @@
 package org.usfirst.frc.team3075.robot.subsystems;
 
-import org.usfirst.frc.team3075.robot.OI;
-import org.usfirst.frc.team3075.robot.RobotMap;
-import org.usfirst.frc.team3075.robot.commands.Wait;
+import libPurple.CANTalon3075;
+import libPurple.utils;
 
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import org.usfirst.frc.team3075.robot.Components;
+import org.usfirst.frc.team3075.robot.commands.Wait;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class Conveyor extends PIDSubsystem {
-
-    
-    public Conveyor(double p, double i, double d, double period) {
-		super(p, i, d, period);
-		setAbsoluteTolerance(RobotMap.conveyorTolerance);
-		// TODO Auto-generated constructor stub
-	}
-    
-    public Conveyor(double p, double i, double d) {
-		super(p, i, d, 0.02);
-		setAbsoluteTolerance(RobotMap.conveyorTolerance);
+public class Conveyor extends Subsystem {
+	
+	
+    public Conveyor() {
+		super();
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,24 +24,14 @@ public class Conveyor extends PIDSubsystem {
         setDefaultCommand(new Wait());
     }
     
-    protected double returnPIDInput() {
-        // Return your input value for the PID loop
-        // e.g. a sensor, like a potentiometer:
-        // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    	
-    	return OI.conveyorEncoder.getDistance();
-    }
-    
-    protected void usePIDOutput(double output) {
-        // Use output to drive your system, like a motor
-        // e.g. yourMotor.set(output);
-    	
-    	RobotMap.conveyorMotor.set(output);
-    }
-    
     public void setSpeed(double speed)
     {
-    	RobotMap.conveyorMotor.set(speed);
+    	Components.conveyorMotor.set(speed);
+    }
+    
+    public boolean isInPositon(double pos)
+    {
+    	return utils.inRange(Components.conveyorMotor.getEncPosition(), pos, 6);
     }
     
 }

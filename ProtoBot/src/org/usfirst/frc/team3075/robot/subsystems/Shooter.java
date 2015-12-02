@@ -22,11 +22,11 @@ public class Shooter extends Subsystem
     
     
     //Control the motors speed
-    public void setWheelsSpeed(double x)
+    public void setWheelsSpeed(double value)
     {
-    	RobotMap.leftWheel.set(x); //This motor is inverted
-    	RobotMap.rightWheel.set(-x);
-    	
+    	RobotMap.leftWheel.set(value); //This motor is inverted
+    	RobotMap.rightWheel.set(-value);
+//    	RobotMap.leftWheel.set(value);
     }
 
 }

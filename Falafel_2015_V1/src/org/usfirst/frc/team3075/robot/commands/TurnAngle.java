@@ -2,8 +2,8 @@ package org.usfirst.frc.team3075.robot.commands;
 
 import libPurple.utils;
 
+import org.usfirst.frc.team3075.robot.Constants;
 import org.usfirst.frc.team3075.robot.Robot;
-import org.usfirst.frc.team3075.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -29,7 +29,7 @@ public class TurnAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.arcadeDrive(0, ( 1 / RobotMap.kpTurn) * (angle - (initialAngle - Robot.drive.getAngle())));
+    	Robot.drive.arcadeDrive(0, ( 1 / Constants.kpTurn) * (angle - (initialAngle - Robot.drive.getAngle())));
     }
 
     // Make this return true when this Command no longer needs to run execute()

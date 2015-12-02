@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3075.robot.commands;
 
-import org.usfirst.frc.team3075.robot.OI;
+import org.usfirst.frc.team3075.robot.Components;
 import org.usfirst.frc.team3075.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,7 +21,7 @@ public class ManualConveyor extends Command {
 	    // Called repeatedly when this Command is scheduled to run
 	    protected void execute() 
 	    {
-	    	Robot.conveyor.setSpeed(OI.systemStick.yGet());
+	    	Robot.conveyor.setSpeed(Components.systemStick.yGet());
 	    }
 
 	    // Make this return true when this Command no longer needs to run execute()

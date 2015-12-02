@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class JoyStick3075 extends Joystick {
 
-	public static double db=0.2;
+	public static double db=0.1;
 	public JoyStick3075(int port) {
 		super(port);
 

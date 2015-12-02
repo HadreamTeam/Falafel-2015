@@ -1,8 +1,7 @@
 package org.usfirst.frc.team3075.robot.commands;
 
-import org.usfirst.frc.team3075.robot.OI;
+import org.usfirst.frc.team3075.robot.Components;
 import org.usfirst.frc.team3075.robot.Robot;
-
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -28,7 +27,7 @@ public class ManualShooter extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	value = ((-OI.systemStick.axisGet(2)) + 1) / 2; // change the value from -1 ~ 1 to 0 ~ 1
+    	value = ((-Components.systemStick.axisGet(2)) + 1) / 2; // change the value from -1 ~ 1 to 0 ~ 1
     	Robot.shooter.setWheelsSpeed(value);
     }
 

@@ -5,7 +5,10 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team3075.robot.commands.AutonomusCommand;
+import org.usfirst.frc.team3075.robot.commands.DriveDistance;
 import org.usfirst.frc.team3075.robot.commands.ExampleCommand;
 import org.usfirst.frc.team3075.robot.subsystems.Conveyor;
 import org.usfirst.frc.team3075.robot.subsystems.DriveSystem;
@@ -26,23 +29,20 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter;
 	public static Conveyor conveyor;
     Command autonomousCommand;
-
+    
+   
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
     	
-    	
-    	OI.init();
-    	RobotMap.init();
-    	drive = new DriveSystem();
-    	shooter = new Shooter();
-    	conveyor = new Conveyor(RobotMap.kpConveyor, RobotMap.kiConveyor, RobotMap.kdConveyor);
-    	
-    	
+    	Constants.init();
+    	Components.init();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+        autonomousCommand = new AutonomusCommand();
+        
+        
     }
 	
 	public void disabledPeriodic() {
@@ -67,6 +67,10 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        Components.conveyorMotor.setPosition(0);
+        Components.driveLeftEncoder.reset();
+        Components.driveRightEncoder.reset();
+        Components.log();
         
         
     }
@@ -83,13 +87,20 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+
+        Robot.drive.setRunPID(Constants.runPID);
         Scheduler.getInstance().run();
+        Components.log();
+        Components.testLog();
     }
     
     /**
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-        LiveWindow.run();
+//        LiveWindow.run();
+        Scheduler.getInstance().run();
+        Components.log();
+        Components.testLog();
     }
 }

@@ -32,7 +32,6 @@ public class Solenoid3075 extends DoubleSolenoid{
 class Toggle extends Command {
 
 	DoubleSolenoid mySol;
-	boolean exe = false;
 	
 	public Toggle(DoubleSolenoid ds)
 	{
@@ -45,11 +44,10 @@ class Toggle extends Command {
     protected void execute() {
     	mySol.set(mySol.get() == DoubleSolenoid.Value.kForward ? 
     			DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
-    	exe = true;
     }
 
     protected boolean isFinished() {
-        return exe;
+        return true;
     }
 
     protected void end() {

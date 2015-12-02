@@ -1,12 +1,13 @@
 package libPurple;
 
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Victor3075 extends Victor {
     private int inverted = 1;
-    private final double MB = 0;
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+    private double motorBound = 0;
+    private double accellimit = 1;
+    private double lastValue = 0;
 
     public Victor3075(int channel, boolean inverted) {
 		super(channel);
@@ -29,7 +30,10 @@ public class Victor3075 extends Victor {
     @Override
     public void set(double speed) {
     	// TODO Auto-generated method stub
-    	super.set(utils.motorBound(speed, MB) * inverted);
+    	speed = utils.motorBound(speed, motorBound) * inverted;
+    	speed = utils.accellimit(speed, lastValue, accellimit);
+    	super.set(speed);
+    	lastValue = speed;
     }
     
     public void setInverted(boolean isInverted)
@@ -37,5 +41,13 @@ public class Victor3075 extends Victor {
     	this.inverted = isInverted ? -1 : 1;
     }
     
-   
+    public void setMotorBound(double newMotorBound)
+    {
+    	motorBound = newMotorBound;
+    }
+    
+    public void setAccellimit(double newAccellimit)
+    {
+    	accellimit = newAccellimit;
+    }
 }
