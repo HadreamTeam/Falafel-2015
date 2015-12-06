@@ -11,11 +11,26 @@ public class AutonomusCommand extends CommandGroup {
     
     public  AutonomusCommand() {
      
+//    	addSequential(new OpenShifter());
     	addParallel(new Prepare2Shoot());
-    	addSequential(new DriveTime(3.5));
+    	addParallel(new DriveDistance(Constants.autonomusDistancetoLine, Constants.autonomusDistancetoLine));
+    	addSequential(new Wait(), 4.5);
     	
-    	//addSequential(new MoveOneSlot());
-    	//addSequential(new MoveOneSlot());
+    	addSequential(new MoveOneSlot());
+    	addSequential(new Wait(), 1);
+    	
+    	addSequential(new MoveOneSlot());
+    	addSequential(new Wait(), 1);
+
+    	addSequential(new MoveOneSlot());
+    	addSequential(new Wait(), 1);
+    	
+    	addSequential(new MoveOneSlot());
+    	addSequential(new Wait(), 1);
+    	
+    	addSequential(new MoveOneSlot());
+
+
 
     
     

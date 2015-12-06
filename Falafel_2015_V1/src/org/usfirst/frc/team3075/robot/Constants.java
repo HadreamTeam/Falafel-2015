@@ -22,7 +22,7 @@ public class Constants {
 	
 	
 	//Constants
-	public static final double autonomusDistancetoLine = 0.5; //just guessing lol
+	public static final double autonomusDistancetoLine = 2.44; //just guessing lol
 	
 	public static final double slotLength = 1148;
 	
@@ -35,18 +35,18 @@ public class Constants {
 	public static final double kGearUp = 1.5;
 	
 	//Drive pid constants
-	public static double kpDriveLeft = 10;
+	public static double kpDriveLeft = 0.4;
 	public static double kiDriveLeft = 0;
-	public static double kdDriveLeft = 0;
+	public static double kdDriveLeft = 1.4;
 	
-	public static double kpDriveRight = 10;
+	public static double kpDriveRight = 0.4;
 	public static double kiDriveRight = 0;
-	public static double kdDriveRight = 0;
+	public static double kdDriveRight = 1.4;
 	
 	//Control period in milliseconds.
 	public static int runPeriod = 20;
 	//The maximum speed of the slower side of the drive system.
-	public static double maxSpeed = 0.25;
+	public static double maxSpeed = 3;
 	
 	public static boolean autoGearFinish;
 	
@@ -56,14 +56,14 @@ public class Constants {
 	
 	//public static double kExponantial = (pulsesPerMeterRight * pulsesPerMeterLeft);
 	
-	public static double driveDistancePerPulseRight = 3025;
-	public static double driveDistancePerPulseLeft = 3033;
+	public static double driveDistancePerPulseRight = 2894;
+	public static double driveDistancePerPulseLeft = 2882;
 	
 	public static double testingDistance = 5;
 	
 	public static boolean runPID = true;
 
-	public static double kAccelimit = 0.3;
+	public static double kAccelimit = 0.1;
 
 	public static double xFix = 0.75;
 

@@ -1,0 +1,244 @@
+package org.usfirst.frc.team3075.robot;
+
+import libPurple.CANTalon3075;
+import libPurple.EncoderTalon3075;
+import libPurple.JoyStick3075;
+import libPurple.Servo3075;
+import libPurple.Solenoid3075;
+import libPurple.Victor3075;
+
+import org.usfirst.frc.team3075.robot.commands.AutoGears;
+import org.usfirst.frc.team3075.robot.commands.CloseShifter;
+import org.usfirst.frc.team3075.robot.commands.ManualConveyor;
+import org.usfirst.frc.team3075.robot.commands.ManualShooter;
+import org.usfirst.frc.team3075.robot.commands.MoveOneSlot;
+import org.usfirst.frc.team3075.robot.commands.NoPidArcadeDrive;
+import org.usfirst.frc.team3075.robot.commands.OpenShifter;
+import org.usfirst.frc.team3075.robot.commands.Prepare2Shoot;
+import org.usfirst.frc.team3075.robot.commands.Wait;
+import org.usfirst.frc.team3075.robot.subsystems.Conveyor;
+import org.usfirst.frc.team3075.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team3075.robot.subsystems.Shooter;
+import org.usfirst.frc.team3075.robot.subsystems.TwoMotorPID;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+/**
+ * This class is the glue that binds the controls on the physical operator
+ * interface to the commands and command groups that allow control of the robot.
+ */
+public class Components {
+	
+	
+
+	//-----------Drive System-----------
+	public static Victor3075 rearLeft;
+	public static Victor3075 frontLeft;
+	public static Victor3075 rearRight;
+	public static Victor3075 frontRight;
+	
+	public static RobotDrive robotDrive;
+
+	public static TwoMotorPID driveLeft;
+	public static TwoMotorPID driveRight;
+	
+	 public static EncoderTalon3075 driveLeftEncoder; //Red izo
+	 public static EncoderTalon3075 driveRightEncoder; //Blue izo
+	
+	public static Solenoid3075 shifter;
+	//-----------Drive System-----------
+	
+	
+	//-----------Conveyor-----------
+	public static CANTalon3075 conveyorMotor;
+//	public static Encoder conveyorEncoder; 
+	//-----------Conveyor-----------
+		
+
+	public static Solenoid3075 Grabber;
+
+	
+	
+	 public static CANTalon3075 leftWheel;
+	 public static CANTalon3075 rightWheel;
+	 
+	 public static Servo3075 portableTargetServo;
+	
+	 public static JoyStick3075 driveStick;
+	 public static JoyStick3075 systemStick;
+	 public static JoystickButton button0;  //Open the shifter on  1
+	 public static JoystickButton button1;  //Close the shifter on 2
+	 public static JoystickButton button2;  //Move one slot on 3
+	 public static JoystickButton button3;  //Toggle conveyor to manual on 4
+	 public static JoystickButton button4; //Prepare to Shoot on 1
+	 public static JoystickButton button5; //Toggle Automatic Gears 
+	 public static JoystickButton button6; //Manual 2 wheel shooter
+	 public static JoystickButton servoButton1;
+	 public static JoystickButton servoButton2;
+	 public static JoystickButton button8; //Graber
+	 public static JoystickButton button9; //Disable PID
+
+
+
+	 
+	 public static Preferences pref;
+	
+	 
+		 	 	 
+	 //Constants
+	 
+	 
+	 public static void init() {
+		 Robot.drive = new DriveSystem();
+	 	 Robot.shooter = new Shooter();
+	 	 Robot.conveyor = new Conveyor();
+	 	 
+	 	 Robot.drive.setTurningSensitivity(0.5);
+	    	
+		 driveStick = new JoyStick3075(0);
+		 driveStick.setDeadeadbandand(0.2);
+		 systemStick = new JoyStick3075(1);
+		 
+		 rearLeft = new Victor3075(3);
+		//rearLeft.setMotorBound(Constants.driveMotorBound);
+		 
+		 frontLeft = new Victor3075(0);
+		//frontLeft.setMotorBound(Constants.driveMotorBound);
+		 
+		 rearRight = new Victor3075(1);
+		//rearRight.setMotorBound(Constants.driveMotorBound);
+		 
+		 frontRight = new Victor3075(2);
+	    //frontRight.setMotorBound(Constants.driveMotorBound);
+
+		 
+		 robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
+			
+	 	 rearRight.setInverted(true);
+	 	 frontRight.setInverted(true);
+	 	 
+	 	conveyorMotor = new CANTalon3075(1);
+		 
+		 leftWheel = new CANTalon3075(0);
+	     rightWheel = new CANTalon3075(2, true);
+	     
+	     portableTargetServo = new Servo3075(4);
+	 	 
+	 	 driveLeftEncoder = new EncoderTalon3075(leftWheel);
+		 driveLeftEncoder.setDistancePerPulse(Constants.driveDistancePerPulseLeft);
+		 driveRightEncoder = new EncoderTalon3075(rightWheel, true);
+		 driveRightEncoder.setDistancePerPulse(Constants.driveDistancePerPulseRight);
+	 	 
+		 driveLeft = new TwoMotorPID(rearLeft, frontLeft, driveLeftEncoder, Constants.kpDriveLeft, Constants.kiDriveLeft, Constants.kdDriveLeft);
+		 driveRight = new TwoMotorPID(rearRight, frontRight, driveRightEncoder, Constants.kpDriveRight, Constants.kiDriveRight, Constants.kdDriveRight);
+	     Grabber = new Solenoid3075(6,7);
+	     
+//		 if(button3.get())
+			
+//		 else
+//			 button3.toggleWhenPressed(new Wait());
+	     
+		 button5 = new JoystickButton(driveStick, 2);
+		 button5.toggleWhenActive(new AutoGears());
+		 
+//		 conveyorEncoder = new Encoder(4, 5,false,Encoder.EncodingType.k4X);
+//		 conveyorEncoder.setDistancePerPulse(kConveyorDiameter * Math.PI / 4);
+		 
+		 shifter = new Solenoid3075(0, 1);
+		 
+		 button1 = new JoystickButton(driveStick, 3);
+		 button1.whenPressed(new CloseShifter());
+		 
+		 button0 = new JoystickButton(driveStick, 4);
+		 button0.whenPressed(new OpenShifter());
+		 
+		 button2 = new JoystickButton(systemStick, 4);
+		 button2.whenPressed(new MoveOneSlot());
+		 
+		 button3 = new JoystickButton(systemStick, 2);
+		 button3.toggleWhenPressed(new ManualConveyor());
+		 
+		 button4 = new JoystickButton(systemStick, 1);
+		 button4.toggleWhenActive(new Prepare2Shoot());
+		 
+		 button6 = new JoystickButton(systemStick, 5);
+		 button6.toggleWhenActive(new ManualShooter());
+		
+		 servoButton1 = new JoystickButton(systemStick, 3);
+//		 servoButton1.toggleWhenActive(portableTargetServo.angleToggle(0, 90));
+		 servoButton2 = new JoystickButton(systemStick, 4);
+		 
+		 button8 = new JoystickButton(driveStick, 1);
+		 button8.whenPressed(Grabber.ToggleCommand());
+
+		 button9 = new JoystickButton(driveStick, 7);
+		 button9.toggleWhenActive(new NoPidArcadeDrive());
+		 
+		 pref = Preferences.getInstance();
+		 
+	 }
+	 
+	 public static void log()
+	 {
+		 SmartDashboard.putNumber("Conveyor Distance ", conveyorMotor.getPosition());
+		 
+		 SmartDashboard.putNumber("System Joystick X", systemStick.xGet());
+		 SmartDashboard.putNumber("System Joystick Y", systemStick.yGet());
+		 
+		 SmartDashboard.putNumber("Drive Joystick X", driveStick.xGet());
+		 SmartDashboard.putNumber("Drive Joystick Y", driveStick.yGet());
+		 
+		 SmartDashboard.putNumber("Conveyor Distance", conveyorMotor.getPosition());
+		 
+		 SmartDashboard.putBoolean("Manual Gears", Constants.autoGearFinish);
+	 }
+	 
+	 public static void testLog()
+	 {
+//		 Constants.pulsesPerMeterLeft = pref.getInt("pulsesPerMeterLeft", 1);
+//		 Constants.pulsesPerMeterRight = pref.getInt("pulsesPerMeterRight", 1);
+
+//		 Constants.kpDriveLeft = pref.getDouble("kpL", 1);
+//		 Constants.kiDriveLeft = pref.getDouble("kiL", 0);
+//		 Constants.kdDriveLeft = pref.getDouble("kdL", 0);
+		 //-----
+		 
+//		 Constants.kpDriveRight = pref.getDouble("kpR", 1);
+//		 Constants.kiDriveRight = pref.getDouble("kiR", 0);
+//		 Constants.kdDriveRight = pref.getDouble("kdR", 0);
+		 
+		 Constants.maxSpeed = pref.getDouble("maxSpeed", 2);
+		 
+		 Constants.testingDistance = pref.getDouble("testDist", 5);
+
+		 Constants.runPID = pref.getBoolean("runPID", true);
+		 
+		 Components.driveStick.setPowerLevel(pref.getInt("powerLevel", 1));
+		 
+		 SmartDashboard.putNumber("Drive Left Rate ", driveLeftEncoder.getRate());
+		 SmartDashboard.putNumber("Drive Right Rate ", driveRightEncoder.getRate());
+		
+//		 SmartDashboard.putNumber("Drive Right Raw ", driveRightEncoder.getRaw());
+//		 SmartDashboard.putNumber("Drive Left Raw ", driveLeftEncoder.getRaw());
+		 
+		 SmartDashboard.putNumber("Drive Distance ", Robot.drive.getDistAverage());
+		 SmartDashboard.putNumber("Drive Right Distance ", Robot.drive.getDistRight());
+//		 SmartDashboard.putNumber("Drive pid ", driveLeftEncoder.pidGet()/Constants.kExponantial);
+		 SmartDashboard.putNumber("Drive Left Distance ", Robot.drive.getDistLeft());
+		 
+//		 SmartDashboard.putNumber("Left pulses per meter ", Robot.drive.getDistLeft()/Constants.kExponantial/Constants.testingDistance);
+//		 SmartDashboard.putNumber("Right pulses per meter ", Robot.drive.getDistRight()/Constants.kExponantial/Constants.testingDistance);
+
+	}
+}
+
+  
+

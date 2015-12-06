@@ -1,0 +1,18 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.command.Command;
+
+public class Servo3075 extends Servo{
+
+	public Servo3075(int channel) {
+		super(channel);
+		// TODO Auto-generated constructor stub
+	}
+
+}
+
+private class goToAngle extends Command
+{
+	
+}

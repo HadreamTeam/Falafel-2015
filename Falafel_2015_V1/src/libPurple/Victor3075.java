@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Victor3075 extends Victor {
     private int inverted = 1;
-    private double motorBound = 0;
+    private double motorBound = 0.05;
     private double accellimit = 1;
     private double lastValue = 0;
 

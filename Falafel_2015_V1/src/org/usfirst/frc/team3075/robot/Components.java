@@ -3,11 +3,13 @@ package org.usfirst.frc.team3075.robot;
 import libPurple.CANTalon3075;
 import libPurple.EncoderTalon3075;
 import libPurple.JoyStick3075;
+import libPurple.Servo3075;
 import libPurple.Solenoid3075;
 import libPurple.Victor3075;
 
 import org.usfirst.frc.team3075.robot.commands.AutoGears;
 import org.usfirst.frc.team3075.robot.commands.CloseShifter;
+import org.usfirst.frc.team3075.robot.commands.JoyStickArcadeDrive;
 import org.usfirst.frc.team3075.robot.commands.ManualConveyor;
 import org.usfirst.frc.team3075.robot.commands.ManualShooter;
 import org.usfirst.frc.team3075.robot.commands.MoveOneSlot;
@@ -23,6 +25,7 @@ import org.usfirst.frc.team3075.robot.subsystems.TwoMotorPID;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.hal.PDPJNI;
@@ -67,6 +70,8 @@ public class Components {
 	
 	 public static CANTalon3075 leftWheel;
 	 public static CANTalon3075 rightWheel;
+	 
+	 public static Servo3075 portableTargetServo;
 	
 	 public static JoyStick3075 driveStick;
 	 public static JoyStick3075 systemStick;
@@ -77,7 +82,8 @@ public class Components {
 	 public static JoystickButton button4; //Prepare to Shoot on 1
 	 public static JoystickButton button5; //Toggle Automatic Gears 
 	 public static JoystickButton button6; //Manual 2 wheel shooter
-	 public static JoystickButton button7; //Manual 1 wheel shooter
+	 public static JoystickButton servoButton1;
+	 public static JoystickButton servoButton2;
 	 public static JoystickButton button8; //Graber
 	 public static JoystickButton button9; //Disable PID
 
@@ -102,17 +108,17 @@ public class Components {
 		 driveStick.setDeadeadbandand(0.2);
 		 systemStick = new JoyStick3075(1);
 		 
-		 rearLeft = new Victor3075(3);
-		 rearLeft.setMotorBound(Constants.driveMotorBound);
+		 rearLeft = new Victor3075(1);
+		//rearLeft.setMotorBound(Constants.driveMotorBound);
 		 
-		 frontLeft = new Victor3075(0);
-		 frontLeft.setMotorBound(Constants.driveMotorBound);
+		 frontLeft = new Victor3075(2);
+		//frontLeft.setMotorBound(Constants.driveMotorBound);
 		 
-		 rearRight = new Victor3075(1);
-		 rearRight.setMotorBound(Constants.driveMotorBound);
+		 rearRight = new Victor3075(3);
+		//rearRight.setMotorBound(Constants.driveMotorBound);
 		 
-		 frontRight = new Victor3075(2);
-		 frontRight.setMotorBound(Constants.driveMotorBound);
+		 frontRight = new Victor3075(0);
+	    //frontRight.setMotorBound(Constants.driveMotorBound);
 
 		 
 		 robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
@@ -124,6 +130,8 @@ public class Components {
 		 
 		 leftWheel = new CANTalon3075(0);
 	     rightWheel = new CANTalon3075(2, true);
+	     
+	     portableTargetServo = new Servo3075(5);
 	 	 
 	 	 driveLeftEncoder = new EncoderTalon3075(leftWheel);
 		 driveLeftEncoder.setDistancePerPulse(Constants.driveDistancePerPulseLeft);
@@ -132,7 +140,6 @@ public class Components {
 	 	 
 		 driveLeft = new TwoMotorPID(rearLeft, frontLeft, driveLeftEncoder, Constants.kpDriveLeft, Constants.kiDriveLeft, Constants.kdDriveLeft);
 		 driveRight = new TwoMotorPID(rearRight, frontRight, driveRightEncoder, Constants.kpDriveRight, Constants.kiDriveRight, Constants.kdDriveRight);
-	     
 	     Grabber = new Solenoid3075(6,7);
 	     
 //		 if(button3.get())
@@ -154,7 +161,7 @@ public class Components {
 		 button0 = new JoystickButton(driveStick, 4);
 		 button0.whenPressed(new OpenShifter());
 		 
-		 button2 = new JoystickButton(systemStick, 4);
+		 button2 = new JoystickButton(systemStick, 5);
 		 button2.whenPressed(new MoveOneSlot());
 		 
 		 button3 = new JoystickButton(systemStick, 2);
@@ -163,18 +170,18 @@ public class Components {
 		 button4 = new JoystickButton(systemStick, 1);
 		 button4.toggleWhenActive(new Prepare2Shoot());
 		 
-		 button6 = new JoystickButton(systemStick, 5);
-		 button6.toggleWhenActive(new ManualShooter());
+//		 button6 = new JoystickButton(systemStick, 5);
+//		 button6.toggleWhenActive(new ManualShooter());
 		
-//		 button7 = new JoystickButton(systemStick, 6);
-//		 button7.toggleWhenActive(new ManualOneWheelShooter());
+		 servoButton1 = new JoystickButton(systemStick, 3);
+//		 servoButton1.toggleWhenActive(portableTargetServo.angleToggle(180, -90));
+		 servoButton2 = new JoystickButton(systemStick, 4);
 		 
 		 button8 = new JoystickButton(driveStick, 1);
 		 button8.whenPressed(Grabber.ToggleCommand());
 
 		 button9 = new JoystickButton(driveStick, 7);
-		 
-		 button9.toggleWhenActive(new NoPidArcadeDrive());
+		 button9.toggleWhenActive(new JoyStickArcadeDrive());
 		 
 		 pref = Preferences.getInstance();
 		 
@@ -193,6 +200,7 @@ public class Components {
 		 SmartDashboard.putNumber("Conveyor Distance", conveyorMotor.getPosition());
 		 
 		 SmartDashboard.putBoolean("Manual Gears", Constants.autoGearFinish);
+		 SmartDashboard.putNumber("servo angle", portableTargetServo.getAngle());
 	 }
 	 
 	 public static void testLog()
@@ -200,14 +208,15 @@ public class Components {
 //		 Constants.pulsesPerMeterLeft = pref.getInt("pulsesPerMeterLeft", 1);
 //		 Constants.pulsesPerMeterRight = pref.getInt("pulsesPerMeterRight", 1);
 
-		 Constants.kpDriveLeft = pref.getDouble("kpL", 1);
-		 Constants.kiDriveLeft = pref.getDouble("kiL", 0);
-		 Constants.kdDriveLeft = pref.getDouble("kdL", 0);
+//		 Constants.kpDriveLeft = pref.getDouble("kpL", 1);
+//		 Constants.kiDriveLeft = pref.getDouble("kiL", 0);
+//		 Constants.kdDriveLeft = pref.getDouble("kdL", 0);
 		 //-----
 		 
-		 Constants.kpDriveRight = pref.getDouble("kpR", 1);
-		 Constants.kiDriveRight = pref.getDouble("kiR", 0);
-		 Constants.kdDriveRight = pref.getDouble("kdR", 0);
+//		 Constants.kpDriveRight = pref.getDouble("kpR", 1);
+//		 Constants.kiDriveRight = pref.getDouble("kiR", 0);
+//		 Constants.kdDriveRight = pref.getDouble("kdR", 0);
+//		 portableTargetServo.setAngle(pref.getDouble("servo", 0));
 		 
 		 Constants.maxSpeed = pref.getDouble("maxSpeed", 2);
 		 

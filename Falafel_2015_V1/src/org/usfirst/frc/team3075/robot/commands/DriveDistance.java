@@ -14,7 +14,7 @@ public class DriveDistance extends Command {
 	private double distanceL = 0;
 	private double initialDistR = 0;
 	private double initialDistL = 0;
-	private final double minDiff = 0.1;
+	private final double minDiff = 0.02;
     public DriveDistance(double distanceRight, double distanceLeft) {
         // Use requires() here to declare subsystem dependencies
     	distanceR = distanceRight;
@@ -39,8 +39,8 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return utils.inRange(distanceL, Robot.drive.getDistLeft(), minDiff) &&
-        	   utils.inRange(distanceR, Robot.drive.getDistRight(), minDiff);
+        return false;
+        	
     }
 
     // Called once after isFinished returns true

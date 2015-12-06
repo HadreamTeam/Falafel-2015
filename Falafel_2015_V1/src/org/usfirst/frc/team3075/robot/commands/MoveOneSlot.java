@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3075.robot.commands;
 
+import libPurple.utils;
+
 import org.usfirst.frc.team3075.robot.Components;
 import org.usfirst.frc.team3075.robot.Constants;
 import org.usfirst.frc.team3075.robot.Robot;
@@ -26,13 +28,15 @@ public class MoveOneSlot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Proportional motor speeds
-    	//Robot.conveyor.setSpeed(1);
-    	Components.conveyorMotor.setPosition(startPos + Constants.slotLength);
+    	Robot.conveyor.setSpeed(1);
+    	//Components.conveyorMotor.setPosition(startPos + Constants.slotLength);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.conveyor.isInPositon(Constants.slotLength + startPos);
+    	
+        return utils.inRange(Components.conveyorMotor.getPosition(), startPos + Constants.slotLength, 100);
+
     }
 
     // Called once after isFinished returns true

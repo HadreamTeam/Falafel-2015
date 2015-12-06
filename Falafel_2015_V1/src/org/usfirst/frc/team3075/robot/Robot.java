@@ -59,6 +59,8 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        Components.log();
+        Components.testLog();
     }
 
     public void teleopInit() {
@@ -70,6 +72,7 @@ public class Robot extends IterativeRobot {
         Components.conveyorMotor.setPosition(0);
         Components.driveLeftEncoder.reset();
         Components.driveRightEncoder.reset();
+        Components.portableTargetServo.setAngle(180);
         Components.log();
         
         
@@ -92,6 +95,10 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         Components.log();
         Components.testLog();
+        if(Components.servoButton1.get() && Components.servoButton2.get())
+        {
+        	Components.portableTargetServo.setAngle(-90);
+        }
     }
     
     /**

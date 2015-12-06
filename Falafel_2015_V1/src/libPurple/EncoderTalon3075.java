@@ -8,6 +8,8 @@ public class EncoderTalon3075 {
 	private double inverted = 1;
 	private static double encoderPulsesPerRotation = 4;
 	
+	private static double minimumValue = 0.005;
+	
 	
 	public EncoderTalon3075(CANTalon3075 talon)
 	{
@@ -36,7 +38,8 @@ public class EncoderTalon3075 {
 	 */
 	public double getRate()
 	{
-		return (myTalon.getSpeed() / 1000) * (dpp / encoderPulsesPerRotation) * inverted;
+		double returnValue = (myTalon.getSpeed() / dpp) * inverted * 10;
+		return Math.abs(returnValue) < minimumValue ? 0 : returnValue;
 	}
 	
 	public double getRawSpeed()
@@ -51,7 +54,8 @@ public class EncoderTalon3075 {
 	
 	public double getDistance()
 	{
-		return (myTalon.getPosition() - resetPoint) / dpp * inverted;
+		double returnValue = (myTalon.getPosition() - resetPoint) / dpp * inverted;
+		return Math.abs(returnValue) < minimumValue ? 0 : returnValue;
 	}
 	
 	public void setDistancePerPulse(double dpp)

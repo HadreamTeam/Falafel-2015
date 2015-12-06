@@ -4,10 +4,9 @@ public class utils
 {
 	
 	// Takes two numbers and check if they are closer than dif
-	public static boolean inRange(double value, double y, double dif)
+	public static boolean inRange(double value, double target, double deviation)
 	{
-		assert dif > 0;
-		return Math.abs(value - y) < dif;
+		return Math.abs(value-target)<=deviation;
 	}
 	
 	public static double deadband(double value, double deadband)
@@ -65,7 +64,7 @@ public class utils
 	
 	public static double[] arcadeDrive(double y, double x, double turnSensitivity)
 	{
-		return arcadeDrive(y, x*turnSensitivity);
+		return arcadeDrive(y, x * turnSensitivity);
 	}
 	
 	public static double powerValue(double value, int power)

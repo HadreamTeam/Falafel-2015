@@ -26,13 +26,10 @@ public class Conveyor extends Subsystem {
     
     public void setSpeed(double speed)
     {
-    	Components.conveyorMotor.set(speed);
+    	Components.conveyorMotor.set(-speed);
     }
     
-    public boolean isInPositon(double pos)
-    {
-    	return utils.inRange(Components.conveyorMotor.getEncPosition(), pos, 6);
-    }
+   
     
 }
 

@@ -23,6 +23,7 @@ public class TwoMotorPID extends PIDSubsystem {
     public TwoMotorPID(Victor3075 rear, Victor3075 front, double p, double i, double d, double period) {
 		super(p, i, d, period);
 		super.setOutputRange(-1, 1);
+		super.setInputRange(-Constants.maxSpeed, Constants.maxSpeed);
 		rearMotor = rear;
 		frontMotor = front;
 		// TODO Auto-generated constructor stub
@@ -31,6 +32,7 @@ public class TwoMotorPID extends PIDSubsystem {
     public TwoMotorPID(Victor3075 rear, Victor3075 front, double p, double i, double d) {
 		super(p, i, d, 0.02);
 		super.setOutputRange(-1, 1);
+		super.setInputRange(-Constants.maxSpeed, Constants.maxSpeed);
 		rearMotor = rear;
 		frontMotor = front;
 		// TODO Auto-generated constructor stub
@@ -39,6 +41,8 @@ public class TwoMotorPID extends PIDSubsystem {
     public TwoMotorPID(Victor3075 rear, Victor3075 front, EncoderTalon3075 encoder, double p, double i, double d) {
 		super(p, i, d, 0.02);
 		super.setOutputRange(-1, 1);
+		super.setInputRange(-Constants.maxSpeed, Constants.maxSpeed);
+
 		rearMotor = rear;
 		frontMotor = front;
 		this.encoder = encoder;
@@ -65,7 +69,7 @@ public class TwoMotorPID extends PIDSubsystem {
     	SmartDashboard.putNumber("pid think", encoder.getRate());
     	
     	return returnRate ? (encoder.getRate() / Constants.maxSpeed):
-    		encoder.getDistance();
+    		encoder.getDistance() ;
     }
     
     protected void usePIDOutput(double output) {
@@ -92,5 +96,14 @@ public class TwoMotorPID extends PIDSubsystem {
     {
     	rearMotor.setMotorBound(newMotorBound);
     	frontMotor.setMotorBound(newMotorBound);
+    	
     }
+    
+    public TwoMotorPID setPID( double p, double i, double d)
+    {
+    	
+    	return new TwoMotorPID(rearMotor, frontMotor, encoder, p, i, d);
+    	
+    }
+    
 }

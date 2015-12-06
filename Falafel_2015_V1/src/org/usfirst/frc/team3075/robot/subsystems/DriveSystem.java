@@ -2,10 +2,12 @@ package org.usfirst.frc.team3075.robot.subsystems;
 
 import libPurple.utils;
 
+import org.omg.CORBA.NO_IMPLEMENT;
 import org.usfirst.frc.team3075.robot.Components;
 import org.usfirst.frc.team3075.robot.Constants;
 import org.usfirst.frc.team3075.robot.Robot;
 import org.usfirst.frc.team3075.robot.commands.JoyStickArcadeDrive;
+import org.usfirst.frc.team3075.robot.commands.NoPidArcadeDrive;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveSystem extends Subsystem{
 	
 	private boolean	runPID = true;
-	private double turnSensitivity = 0.5;
+	private double turnSensitivity = 0.3;
 	
 	public DriveSystem() {
 		// TODO Auto-generated constructor stub
@@ -25,7 +27,7 @@ public class DriveSystem extends Subsystem{
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new JoyStickArcadeDrive());
+		setDefaultCommand(new NoPidArcadeDrive());
 	}
 	
 	public void rawArcadeDrive(double y, double x)
@@ -34,7 +36,7 @@ public class DriveSystem extends Subsystem{
 		Components.driveLeft.disable();
 		Components.driveRight.disable();
 		
-		double[] arr = utils.arcadeDrive(-y, -x);
+		double[] arr = utils.arcadeDrive(y, x);
 		
 		SmartDashboard.putNumber("l", arr[0]);
 		SmartDashboard.putNumber("r", arr[1]);
@@ -46,17 +48,17 @@ public class DriveSystem extends Subsystem{
 	
 	public void arcadeDrive(double y, double x)
 	{
+		// arr[0] = left
 		double[] driveValues = utils.arcadeDrive(y, x, turnSensitivity);
 //		if(runPID)
 //		{
-			Components.driveLeft.enable();
-			Components.driveRight.enable();
+			
 
 			Components.driveLeft.setReturnRate(true);
 			Components.driveRight.setReturnRate(true);
 		
-//			Components.driveLeft.setAbsoluteTolerance(0.1);
-//			Components.driveRight.setAbsoluteTolerance(0.1);
+			Components.driveLeft.setAbsoluteTolerance(0.05);
+			Components.driveRight.setAbsoluteTolerance(0.05);
 			
 			SmartDashboard.putNumber("Setpoint r",driveValues[1]*Constants.maxSpeed);
 			SmartDashboard.putNumber("Setpoint l",driveValues[0]*Constants.maxSpeed);
@@ -79,6 +81,9 @@ public class DriveSystem extends Subsystem{
 
 		Components.driveLeft.setReturnRate(false);
 		Components.driveRight.setReturnRate(false);
+		
+		Components.driveLeft.setAbsoluteTolerance(0.02);
+		Components.driveRight.setAbsoluteTolerance(0.02);
 		
 		Components.driveLeft.setSetpoint(targetLeft);
 		Components.driveRight.setSetpoint(targetRight);
