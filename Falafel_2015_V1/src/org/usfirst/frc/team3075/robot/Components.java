@@ -102,7 +102,7 @@ public class Components {
 	 	 Robot.shooter = new Shooter();
 	 	 Robot.conveyor = new Conveyor();
 	 	 
-	 	 Robot.drive.setTurningSensitivity(0.5);
+	 	 Robot.drive.setTurningSensitivity(1);
 	    	
 		 driveStick = new JoyStick3075(0);
 		 driveStick.setDeadeadbandand(0.2);
@@ -119,12 +119,14 @@ public class Components {
 		 
 		 frontRight = new Victor3075(0);
 	    //frontRight.setMotorBound(Constants.driveMotorBound);
+		 
+		 
+		 rearLeft.setInverted(true);
+	 	 frontLeft.setInverted(true);
 
 		 
 		 robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 			
-	 	 rearLeft.setInverted(true);
-	 	 frontLeft.setInverted(true);
 	 	 
 	 	conveyorMotor = new CANTalon3075(1);
 		 
@@ -140,7 +142,8 @@ public class Components {
 	 	 
 		 driveLeft = new TwoMotorPID(rearLeft, frontLeft, driveLeftEncoder, Constants.kpDriveLeft, Constants.kiDriveLeft, Constants.kdDriveLeft);
 		 driveRight = new TwoMotorPID(rearRight, frontRight, driveRightEncoder, Constants.kpDriveRight, Constants.kiDriveRight, Constants.kdDriveRight);
-	     Grabber = new Solenoid3075(6,7);
+		 
+		 Grabber = new Solenoid3075(6,7);
 	     
 //		 if(button3.get())
 			
@@ -168,7 +171,7 @@ public class Components {
 		 button3.toggleWhenPressed(new ManualConveyor());
 		 
 		 button4 = new JoystickButton(systemStick, 1);
-		 button4.toggleWhenActive(new Prepare2Shoot());
+		 button4.toggleWhenActive(new Prepare2Shoot(Constants.WheelsSpeed));
 		 
 //		 button6 = new JoystickButton(systemStick, 5);
 //		 button6.toggleWhenActive(new ManualShooter());
@@ -180,8 +183,8 @@ public class Components {
 		 button8 = new JoystickButton(driveStick, 1);
 		 button8.whenPressed(Grabber.ToggleCommand());
 
-		 button9 = new JoystickButton(driveStick, 7);
-		 button9.toggleWhenActive(new JoyStickArcadeDrive());
+//		 button9 = new JoystickButton(driveStick, 7);
+//		 button9.toggleWhenActive(new JoyStickArcadeDrive());
 		 
 		 pref = Preferences.getInstance();
 		 
@@ -221,6 +224,9 @@ public class Components {
 		 Constants.maxSpeed = pref.getDouble("maxSpeed", 2);
 		 
 		 Constants.testingDistance = pref.getDouble("testDist", 5);
+		 
+		 Constants.WheelsSpeed = pref.getDouble("WheelsSpeed", 0.76);
+
 
 		 Constants.runPID = pref.getBoolean("runPID", true);
 		 

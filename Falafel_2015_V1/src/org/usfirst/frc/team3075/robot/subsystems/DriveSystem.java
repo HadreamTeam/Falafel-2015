@@ -38,8 +38,9 @@ public class DriveSystem extends Subsystem{
 		
 		double[] arr = utils.arcadeDrive(y, x);
 		
-		SmartDashboard.putNumber("l", arr[0]);
-		SmartDashboard.putNumber("r", arr[1]);
+		SmartDashboard.putNumber("left value raw", arr[0]);
+		SmartDashboard.putNumber("right value raw", arr[1]);
+		
 		
 		
 		Components.robotDrive.tankDrive(arr[0], arr[1]);
@@ -87,6 +88,11 @@ public class DriveSystem extends Subsystem{
 		
 		Components.driveLeft.setSetpoint(targetLeft);
 		Components.driveRight.setSetpoint(targetRight);
+	}
+	
+	public void turnAngle(double angle)
+	{
+		driveDistance(utils.angleDist(angle), -utils.angleDist(angle));
 	}
 	
 	public double getDistAverage()
@@ -143,6 +149,12 @@ public class DriveSystem extends Subsystem{
 	{
 		Components.driveLeft.setAccellimit(newAccellimit);
 		Components.driveRight.setAccellimit(newAccellimit);
+	}
+	
+	public void setDeAccellimit(double newdeAccellimit)
+	{
+		Components.driveLeft.setDeAccellimit(newdeAccellimit);
+		Components.driveRight.setDeAccellimit(newdeAccellimit);
 	}
 	
 	public void setMotorBound(double newMotorBound)

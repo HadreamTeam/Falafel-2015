@@ -22,7 +22,6 @@ public class TwoMotorPID extends PIDSubsystem {
 	
     public TwoMotorPID(Victor3075 rear, Victor3075 front, double p, double i, double d, double period) {
 		super(p, i, d, period);
-		super.setOutputRange(-1, 1);
 		super.setInputRange(-Constants.maxSpeed, Constants.maxSpeed);
 		rearMotor = rear;
 		frontMotor = front;
@@ -31,7 +30,6 @@ public class TwoMotorPID extends PIDSubsystem {
     
     public TwoMotorPID(Victor3075 rear, Victor3075 front, double p, double i, double d) {
 		super(p, i, d, 0.02);
-		super.setOutputRange(-1, 1);
 		super.setInputRange(-Constants.maxSpeed, Constants.maxSpeed);
 		rearMotor = rear;
 		frontMotor = front;
@@ -40,7 +38,6 @@ public class TwoMotorPID extends PIDSubsystem {
     
     public TwoMotorPID(Victor3075 rear, Victor3075 front, EncoderTalon3075 encoder, double p, double i, double d) {
 		super(p, i, d, 0.02);
-		super.setOutputRange(-1, 1);
 		super.setInputRange(-Constants.maxSpeed, Constants.maxSpeed);
 
 		rearMotor = rear;
@@ -68,7 +65,7 @@ public class TwoMotorPID extends PIDSubsystem {
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
     	SmartDashboard.putNumber("pid think", encoder.getRate());
     	
-    	return returnRate ? (encoder.getRate() / Constants.maxSpeed):
+    	return returnRate ? (encoder.getRate()):
     		encoder.getDistance() ;
     }
     
@@ -90,6 +87,12 @@ public class TwoMotorPID extends PIDSubsystem {
     {
     	rearMotor.setAccellimit(newAccellimit);
     	frontMotor.setAccellimit(newAccellimit);
+    }
+    
+    public void setDeAccellimit(double newdeAccellimit)
+    {
+    	rearMotor.setDeAccellimit(newdeAccellimit);
+    	frontMotor.setDeAccellimit(newdeAccellimit);
     }
     
     public void setMotorBound(double newMotorBound)

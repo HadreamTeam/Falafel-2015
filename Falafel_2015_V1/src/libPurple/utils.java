@@ -1,5 +1,7 @@
 package libPurple;
 
+import org.usfirst.frc.team3075.robot.Constants;
+
 public class utils
 {
 	
@@ -16,6 +18,7 @@ public class utils
 	
 	public static double accellimit(double currentValue, double lastValue, double accellimit)
 	{
+//		double acc = Math.signum(currentValue - lastValue) > 0 ? accellimit : deaccelimit;
 		return  lastValue + (Math.signum(currentValue - lastValue) * Math.min(accellimit, Math.abs(currentValue - lastValue)));
 	}
 	
@@ -70,5 +73,10 @@ public class utils
 	public static double powerValue(double value, int power)
 	{
 		return Math.signum(value)*Math.abs(Math.pow(value, power));
+	}
+	
+	public static double angleDist(double angle)
+	{
+		return (Math.PI*Constants.robotWidth)*(angle/360);
 	}
 }

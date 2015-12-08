@@ -4,7 +4,9 @@ import libPurple.CANTalon3075;
 import libPurple.utils;
 
 import org.usfirst.frc.team3075.robot.Components;
+import org.usfirst.frc.team3075.robot.commands.ManualConveyor;
 import org.usfirst.frc.team3075.robot.commands.Wait;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -21,7 +23,7 @@ public class Conveyor extends Subsystem {
 
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new Wait());
+        setDefaultCommand(new ManualConveyor());
     }
     
     public void setSpeed(double speed)

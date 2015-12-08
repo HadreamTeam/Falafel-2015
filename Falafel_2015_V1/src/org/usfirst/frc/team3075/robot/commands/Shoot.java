@@ -9,7 +9,6 @@ public class Shoot extends CommandGroup {
     
     public  Shoot() {
     	
-		addParallel(new Prepare2Shoot());
 
         // Add Commands here:
     	for(int i =0; i<5;i++)

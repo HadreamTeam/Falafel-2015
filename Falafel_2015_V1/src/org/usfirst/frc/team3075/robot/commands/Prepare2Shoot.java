@@ -17,9 +17,12 @@ public class Prepare2Shoot extends Command {
 	
 	
 	
-    public Prepare2Shoot() {
+    private double speed;
+
+	public Prepare2Shoot(double speed) {
         // Use requires() here to declare subsystem dependencies
          requires(Robot.shooter);
+         this.speed = speed;
          
     }
 
@@ -33,7 +36,7 @@ public class Prepare2Shoot extends Command {
     
     protected void execute() 
     {
-    	Robot.shooter.setWheelsSpeed(0.8);
+    	Robot.shooter.setWheelsSpeed(speed);
     	
     	SmartDashboard.putNumber("Time 2 Shoot", timeSinceInitialized());
     	SmartDashboard.putBoolean("Ready to Shoot", isTimedOut());

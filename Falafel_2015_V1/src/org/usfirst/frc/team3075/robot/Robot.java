@@ -52,12 +52,25 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
+        
+        Components.driveLeft.setOutputRange(-0.5, 0.5);
+		Components.driveRight.setOutputRange(-0.65, 0.65);
+        Components.conveyorMotor.setPosition(0);
+        Robot.conveyor.setSpeed(0);
+        Components.driveLeftEncoder.reset();
+        Components.driveRightEncoder.reset();
+        Components.portableTargetServo.setAngle(180);
+        Components.log();
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+    	
+//    	drive.setAccellimit(2);
+//    	drive.setDeAccellimit(2);
+
         Scheduler.getInstance().run();
         Components.log();
         Components.testLog();
@@ -69,7 +82,13 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+//    	drive.setAccellimit(Constants.kAccelimit);
+//        drive.setDeAccellimit(Constants.kAccelimit);
+        Components.driveLeft.setOutputRange(-1, 1);
+		Components.driveRight.setOutputRange(-1, 1);
         Components.conveyorMotor.setPosition(0);
+        Robot.conveyor.setSpeed(0);
         Components.driveLeftEncoder.reset();
         Components.driveRightEncoder.reset();
         Components.portableTargetServo.setAngle(180);
@@ -90,8 +109,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-
-        Robot.drive.setRunPID(Constants.runPID);
+        drive.setRunPID(Constants.runPID);
         Scheduler.getInstance().run();
         Components.log();
         Components.testLog();

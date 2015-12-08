@@ -15,6 +15,7 @@ public class DriveDistance extends Command {
 	private double initialDistR = 0;
 	private double initialDistL = 0;
 	private final double minDiff = 0.02;
+	
     public DriveDistance(double distanceRight, double distanceLeft) {
         // Use requires() here to declare subsystem dependencies
     	distanceR = distanceRight;
