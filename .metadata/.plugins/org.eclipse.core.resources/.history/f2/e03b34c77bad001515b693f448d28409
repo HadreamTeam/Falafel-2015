@@ -1,0 +1,241 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+
+/**
+ *  						*** 3075 ***
+ *  This class is our generic drive system. It includes:
+ *  PID (by distance)
+ *  PID (by speed)
+ */
+public class DriveSystem3075 extends Subsystem 
+{
+	private SpeedController3075[] driveLeft = new SpeedController3075[2];
+	private SpeedController3075[] driveRight = new SpeedController3075[2];
+	
+	private PIDGetEncoder encoderRight;
+	private PIDGetEncoder encoderLeft;
+	
+	private PIDController pidLeftDistance;
+	private PIDController pidRightDistance;
+	private PIDController pidDiff;
+	
+	private PIDController pidLeftRate;
+	private PIDController pidRightRate;
+	
+//	PIDController pidDiffRate;
+	
+	private double maxSpeed = 1;
+	private double accellimit;
+	
+	public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+    }
+	
+    public DriveSystem3075(SpeedController3075[] driveLeft, Encoder encoderLeft,
+    		SpeedController3075[] driveRight, Encoder encoderRight)
+    {
+		super();
+		this.driveLeft = driveLeft;
+		this.driveRight = driveRight;
+		
+		this.encoderLeft = new PIDGetEncoder(encoderLeft, true);
+		this.encoderRight = new PIDGetEncoder(encoderRight, true);
+
+		
+		driveLeft[0].setSlave(driveLeft[1]);
+		driveRight[0].setSlave(driveRight[1]);
+	}
+    
+    public DriveSystem3075(SpeedController3075 rearLeft, SpeedController3075 frontLeft, Encoder encoderLeft,
+    		SpeedController3075 rearRight, SpeedController3075 frontRight, Encoder encoderRight)
+    {
+		super();
+		driveLeft[0] = rearLeft;
+		driveLeft[1] = frontLeft;
+		driveRight[0] = rearRight;
+		driveRight[1] = frontRight;
+		
+		this.encoderLeft = new PIDGetEncoder(encoderLeft, true);
+		this.encoderRight = new PIDGetEncoder(encoderRight, true);
+		
+		driveLeft[0].setSlave(driveLeft[1]);
+		driveRight[0].setSlave(driveRight[1]);
+	}
+    
+    public DriveSystem3075(int rearLeft, int frontLeft, Encoder encoderLeft, int rearRight, int frontRight, Encoder encoderRight)
+    {
+		super();
+		driveLeft[0] = new Victor3075(rearLeft);
+		driveLeft[1] = new Victor3075(frontLeft);
+		driveRight[0] = new Victor3075(rearRight);
+		driveRight[1] = new Victor3075(frontRight);
+		this.encoderLeft = new PIDGetEncoder(encoderLeft, true);
+		this.encoderRight = new PIDGetEncoder(encoderRight, true);
+		
+		driveLeft[0].setSlave(driveLeft[1]);
+		driveRight[0].setSlave(driveRight[1]);
+		
+	}
+    
+    public void setPID(double p, double i, double d)
+    {
+    	pidLeftRate = new PIDController(p, i, d, encoderLeft, driveLeft[0]);
+    	pidRightRate = new PIDController(p, i, d, encoderRight, driveRight[0]);
+    	
+    	pidRightRate.setInputRange(-maxSpeed, maxSpeed);
+    	pidRightRate.setOutputRange(-accellimit, accellimit);
+    }
+    
+    public void enablePID()
+    {
+    	pidLeftRate.enable();
+    	pidRightRate.enable();
+    }
+    
+    public void setLeft(double speed)
+    {
+    	if(pidLeftRate != null && pidLeftRate.isEnable())
+    	{
+    		pidLeftRate.setSetpoint(speed * maxSpeed);
+    		speed += pidLeftRate.get();
+    	}
+    	driveLeft[0].set(speed);
+    }
+    
+    public void setRight(double speed)
+    {
+    	if(pidRightRate != null && pidRightRate.isEnable())
+    	{
+    		pidRightRate.setSetpoint(speed * maxSpeed);
+    		speed += pidRightRate.get();
+    	}
+    	driveRight[0].set(speed);
+    }
+    
+    public void setTankDrive(double leftSpeed, double rightSpeed)
+    {
+    	setLeft(leftSpeed);
+    	setRight(rightSpeed);
+    }
+    
+    private void setTankDrive(double[] speed)
+    {
+    	setLeft(speed[0]);
+    	setRight(speed[1]);
+    }
+    
+    public void setArcadeDrive(double moveSpeed, double rotateSpeed)
+    {
+    	setTankDrive(utils.arcadeDrive(moveSpeed, rotateSpeed));
+    }
+    
+    
+	public double getMaxSpeed() {
+		return maxSpeed;
+	}
+
+	/**
+	 * 
+	 * @param maxSpeed should be the robot's weak side max speed
+	 */
+	public void setMaxSpeed(double maxSpeed) {
+		this.maxSpeed = maxSpeed;
+	}
+
+	    
+}
+
+
+class AutoDrive extends Command{
+	
+	private double rightDistance;
+	private double leftDistance;
+	
+	private PIDController pidLeftDistance;
+	private PIDController pidRightDistance;
+	private PIDController pidDiff;
+	
+	private DriveSystem3075 driveSystem;
+	
+	AutoDrive(DriveSystem3075 driveSystem, double leftDistance, double rightDistance)
+	{ 
+    	this.rightDistance = rightDistance;
+    	this.leftDistance = leftDistance;
+    	
+    	this.driveSystem = driveSystem;
+	}
+	
+    AutoDrive(DriveSystem3075 driveSystem, double leftDistance, PIDController pidLeftDistance, double rightDistance, PIDController pidRightDistance)
+	{ 
+    	this.rightDistance = rightDistance;
+    	this.leftDistance = leftDistance;
+    	
+    	this.pidLeftDistance = pidLeftDistance;
+    	this.pidRightDistance = pidRightDistance;
+    	
+    	this.driveSystem = driveSystem;
+
+	}
+    
+    AutoDrive(DriveSystem3075 driveSystem, double leftDistance, PIDController pidLeftDistance, double rightDistance, PIDController pidRightDistance, PIDController pidDiff)
+	{ 
+    	this.rightDistance = rightDistance;
+    	this.leftDistance = leftDistance;
+    	
+    	this.pidLeftDistance = pidLeftDistance;
+    	this.pidRightDistance = pidRightDistance;
+    	
+    	this.pidDiff = pidDiff;
+    	
+    	this.driveSystem = driveSystem;
+	}
+	
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		pidLeftDistance.enable();
+		pidRightDistance.enable();
+		pidDiff.enable();
+		
+		pidLeftDistance.setSetpoint(0);
+		pidLeftDistance.setSetpoint(-pidLeftDistance.getError() + leftDistance);
+		
+		pidRightDistance.setSetpoint(0);
+		pidRightDistance.setSetpoint(-pidRightDistance.getError() + rightDistance);
+		
+		pidDiff.setSetpoint(0);
+		pidDiff.setSetpoint(-pidDiff.getError());
+	}
+
+	@Override
+	protected void execute() {
+		// TODO Auto-generated method stub
+		driveSystem.setTankDrive(pidLeftDistance.get() - pidDiff.get(), pidRightDistance.get() + pidDiff.get());
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return pidLeftDistance.onTarget() && pidRightDistance.onTarget();
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+		pidLeftDistance.disable();
+		pidRightDistance.disable();
+		pidDiff.disable();
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		end();
+	}
+	
+}

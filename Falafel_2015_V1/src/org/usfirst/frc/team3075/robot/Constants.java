@@ -22,7 +22,7 @@ public class Constants {
 	
 	
 	//Constants
-	public static final double autonomusDistancetoLine = 2.45; 
+	public static final double autonomusDistancetoLine = 2.50; 
 	
 	public static final double slotLength = 1148;
 	

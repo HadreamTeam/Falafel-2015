@@ -1,0 +1,7 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.PIDOutput;
+
+public class PIDOutput3075 implements PIDOutput{
+
+}

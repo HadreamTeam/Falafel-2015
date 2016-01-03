@@ -1,0 +1,30 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.Encoder;
+
+public class Encoder3075 extends Encoder{
+
+	private boolean pidGetRate = true;
+	
+	public Encoder3075(int aChannel, int bChannel, boolean reverseDirection, EncodingType encodingType) {
+		
+		super(aChannel, bChannel, reverseDirection, encodingType);
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public double pidGet()
+	{
+		return pidGetRate ? super.getRate():super.getDistance();
+	}
+
+	public boolean isPidGetRate() {
+		return pidGetRate;
+	}
+
+	public void setPidGetRate(boolean pidGetRate) {
+		this.pidGetRate = pidGetRate;
+	}
+
+	
+}

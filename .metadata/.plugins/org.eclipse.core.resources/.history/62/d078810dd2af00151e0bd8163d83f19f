@@ -1,0 +1,10 @@
+package org.usfirst.frc.team3075.robot;
+
+public class Constants {
+
+	public static void init()
+	{
+        
+	}
+	
+}

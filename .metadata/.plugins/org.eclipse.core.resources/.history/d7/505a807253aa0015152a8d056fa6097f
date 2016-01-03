@@ -1,0 +1,24 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.PIDOutput;
+
+public class PIDOutput3075 implements PIDOutput{
+	
+	private SpeedController motor;
+
+	public PIDOutput3075(SpeedController motor) {
+		super();
+		this.motor = motor;
+	}
+
+
+	@Override
+	public void pidWrite(double output) {
+		// TODO Auto-generated method stub
+		
+		motor.set(motor.get() + output);
+		
+		
+	}
+
+}

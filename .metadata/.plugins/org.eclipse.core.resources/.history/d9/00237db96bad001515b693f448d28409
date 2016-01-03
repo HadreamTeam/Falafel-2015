@@ -1,0 +1,26 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSource.PIDSourceParameter;
+
+public class PIDGetEncoder implements PIDSource{
+
+	private Encoder encoder;
+	private boolean returnRate;
+	
+	public PIDGetEncoder(Encoder e, boolean returnRate)
+	{
+		encoder = e;
+		this.returnRate = returnRate;
+	}
+	
+	@Override
+	public double pidGet() {
+		
+		// TODO Auto-generated method stub
+		return returnRate ? encoder.getRate() : encoder.getDistance();
+	}
+	
+	
+}

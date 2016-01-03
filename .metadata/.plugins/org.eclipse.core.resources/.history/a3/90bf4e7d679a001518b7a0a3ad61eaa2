@@ -1,7 +1,0 @@
-package libPurple;
-
-import edu.wpi.first.wpilibj.Servo;
-
-public class Servo3075 extends Servo{
-
-}

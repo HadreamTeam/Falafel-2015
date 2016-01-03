@@ -1,0 +1,30 @@
+package org.usfirst.frc.team3075.robot;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
+import libPurple.SpeedController3075;
+import libPurple.Victor3075;
+
+/**
+ * This class is the glue that binds the controls on the physical operator
+ * interface to the commands and command groups that allow control of the robot.
+ */
+public class Components {
+	 
+	public static SpeedController3075 rearLeft;
+	public static SpeedController3075 frontLeft;
+	public static SpeedController3075 rearRight;
+	public static SpeedController3075 frontRight;
+	public static RobotDrive robotDrive;
+	
+	public static Joystick driveStick;
+	
+	public static void init() {
+		robotDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
+		driveStick = new Joystick(0);
+		robotDrive.arcadeDrive(driveStick);
+	}
+}
+
+  
+

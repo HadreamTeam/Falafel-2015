@@ -1,0 +1,104 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Victor;
+/**
+ *
+ */
+public class DriveSystem3075 extends Subsystem 
+{
+	Victor3075 rearLeft;
+	Victor3075 frontLeft;
+	Victor3075 rearRight;
+	Victor3075 frontRight;
+	
+	Encoder encoderRight;
+	Encoder encoderLeft;
+	
+	PIDController pidRight;
+	PIDController pidLeft;
+	
+    public DriveSystem3075(Victor3075 rearLeft, Victor3075 frontLeft, Encoder encoderLeft,
+    		Victor3075 rearRight, Victor3075 frontRight, Encoder encoderRight)
+    {
+		super();
+		this.rearLeft = rearLeft;
+		this.frontLeft = frontLeft;
+		this.rearRight = rearRight;
+		this.frontRight = frontRight;
+		this.encoderLeft = encoderLeft;
+		this.encoderRight = encoderRight;
+		
+		rearLeft.setSlave(frontLeft);
+		rearRight.setSlave(frontRight);
+	}
+    
+    public DriveSystem3075(int rearLeft, int frontLeft, Encoder encoderLeft, int rearRight, int frontRight, Encoder encoderRight)
+    {
+		super();
+		this.rearLeft = new Victor3075(rearLeft);
+		this.frontLeft = new Victor3075(frontLeft);
+		this.rearRight = new Victor3075(rearRight);
+		this.frontRight = new Victor3075(frontRight);
+		this.encoderLeft = encoderLeft;
+		this.encoderRight = encoderRight;
+	}
+    
+    public void PIDEnable(double p, double i, double d)
+    {
+    	pidLeft = new PIDController(p, i, d, encoderLeft, rearLeft);
+    	pidRight = new PIDController(p, i, d, encoderRight, rearRight);
+    }
+    
+    public void setTankDrive(double leftSpeed, double rightSpeed)
+    {
+    	rearLeft.s
+    }
+
+	// Put methods for controlling this subsystem
+    // here. Call these from Commands.
+
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    
+}
+
+class DriveDistance extends Command{
+
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

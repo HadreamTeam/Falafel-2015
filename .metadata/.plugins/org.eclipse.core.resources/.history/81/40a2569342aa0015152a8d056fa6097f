@@ -1,0 +1,165 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Victor;
+/**
+ *  						*** 3075 ***
+ *  This class is our generic drive system. It includes:
+ *  PID (by distance)
+ *  PID (by speed)
+ */
+public class DriveSystem3075 extends Subsystem 
+{
+	SpeedController3075[] driveLeft = new SpeedController3075[2];
+	SpeedController3075[] driveRight = new SpeedController3075[2];
+	
+	Encoder encoderRight;
+	Encoder encoderLeft;
+	
+	PIDController pidRight;
+	PIDController pidLeft;
+	PIDController pidDiff;
+	
+	public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+    }
+	
+    public DriveSystem3075(SpeedController3075 rearLeft, SpeedController3075 frontLeft, Encoder encoderLeft,
+    		SpeedController3075 rearRight, SpeedController3075 frontRight, Encoder encoderRight)
+    {
+		super();
+		driveLeft[0] = rearLeft;
+		driveLeft[1] = frontLeft;
+		driveRight[0] = rearRight;
+		driveRight[1] = frontRight;
+		this.encoderLeft = encoderLeft;
+		this.encoderRight = encoderRight;
+		
+		driveLeft[0].setSlave(driveLeft[1]);
+		driveRight[0].setSlave(driveRight[1]);
+	}
+    
+    public DriveSystem3075(SpeedController3075[] driveLeft, Encoder encoderLeft,
+    		SpeedController3075[] driveRight, Encoder encoderRight)
+    {
+		super();
+		this.driveLeft = driveLeft;
+		this.driveRight = driveRight;
+		this.encoderLeft = encoderLeft;
+		this.encoderRight = encoderRight;
+		
+		driveLeft[0].setSlave(driveLeft[1]);
+		driveRight[0].setSlave(driveRight[1]);
+	}
+    
+    public DriveSystem3075(int rearLeft, int frontLeft, Encoder encoderLeft, int rearRight, int frontRight, Encoder encoderRight)
+    {
+		super();
+		driveLeft[0] = new SpeedController3075(rearLeft);
+		driveLeft[1] = new SpeedController3075(frontLeft);
+		driveRight[0] = new SpeedController3075(rearRight);
+		driveRight[1] = new SpeedController3075(frontRight);
+		this.encoderLeft = encoderLeft;
+		this.encoderRight = encoderRight;
+		
+		driveLeft[0].setSlave(driveLeft[1]);
+		driveRight[0].setSlave(driveRight[1]);
+	}
+    
+    public void setPID(double p, double i, double d)
+    {
+    	pidLeft = new PIDController(p, i, d, encoderLeft, driveLeft[0]);
+    	pidRight = new PIDController(p, i, d, encoderRight, driveRight[0]);
+    }
+    
+    public void enablePID()
+    {
+    	pidLeft.enable();
+    	pidRight.enable();
+    }
+    
+    public void setTankDrive(double leftSpeed, double rightSpeed)
+    {
+    	setLeft(leftSpeed);
+    	setRight(rightSpeed);
+    }
+    
+    public void setTankDrive(double[] speed)
+    {
+    	setLeft(speed[0]);
+    	setRight(speed[1]);
+    }
+    
+    public void setArcadeDrive(double moveSpeed, double rotateSpeed)
+    {
+    	setTankDrive(utils.arcadeDrive(moveSpeed, rotateSpeed));
+    }
+    
+    public void setLeft(double speed)
+    {
+    	if(pidLeft!=null&&pidLeft.isEnable()&&pidRight!=null&&pidRight.isEnable())
+    	{
+    		pidLeft.setSetpoint(speed);
+    		speed = pidLeft.get();
+    	}
+    	driveLeft[0].set(speed);
+    }
+    
+    public void setRight(double speed)
+    {
+    	if(pidLeft!=null&&pidRight!=null)
+    	{
+    		pidRight.setSetpoint(speed);
+    		speed = pidRight.get();
+    	}
+    	driveRight[0].set(speed);
+    }
+
+	// Put methods for controlling this subsystem
+    // here. Call these from Commands.
+
+    
+    
+}
+
+class DriveDistance extends Command{
+	
+	public DriveDistance(double dist)
+	{
+	}
+	
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

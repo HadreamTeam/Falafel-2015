@@ -1,0 +1,7 @@
+package libPurple;
+
+public class Joystick3075 {
+	public double get(){
+		return 0;
+	}
+}

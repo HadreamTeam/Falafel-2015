@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.command.CommandGroup"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Solenoid"/>
-<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.Grab"/>
-<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.PneuWait"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Compressor"/>
-<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.GearDown"/>
-<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.GearUp"/>
-<fullyQualifiedTypeName name="LibPurple.Solenoid3075"/>
-<fullyQualifiedTypeName name="LibPurple.DoubleSolenoid3075"/>
-<fullyQualifiedTypeName name="java.lang.Math"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.command.PIDSubsystem"/>
-<fullyQualifiedTypeName name="libPurple.Victor3075"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.hal.CanTalonSRX"/>
 <fullyQualifiedTypeName name="libPurple.CanTalonSRX3075"/>
 <fullyQualifiedTypeName name="LibPurple.CANTalon3075"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.RobotMap"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.buttons.JoystickButton"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.AutoGears"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Encoder"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.command.Subsystem"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.OI"/>
 <fullyQualifiedTypeName name="libPurple.Solenoid3075"/>
@@ -35,10 +21,8 @@
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.AutonomusCommand"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.MoveOneSlot"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.RobotDrive"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Victor"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.Robot"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.DriveTime"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.CANTalon"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="libPurple.CANTalon3075"/>
 <fullyQualifiedTypeName name="libPurple.EncoderTalon3075"/>
@@ -51,13 +35,29 @@
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.command.Command"/>
 <fullyQualifiedTypeName name="java.lang.Enum"/>
 <fullyQualifiedTypeName name="libPurple.utils"/>
-<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.Components"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.JoyStickArcadeDrive"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.NO_IMPLEMENT"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.NoPidArcadeDrive"/>
 <fullyQualifiedTypeName name="javax.swing.text.StyleContext.SmallAttributeSet"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.smartdashboard.SmartDashboard"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.ManualConveyor"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.Constants"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.Prepare2Shoot"/>
+<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.Components"/>
+<fullyQualifiedTypeName name="org.usfirst.frc.team3075.robot.commands.MoveOneSlotTime"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.smartdashboard.SmartDashboard"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Gyro"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Ultrasonic"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.DigitalInput"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.hal.AccelerometerJNI"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Encoder"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.PWM"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.SafePWM"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Victor"/>
+<fullyQualifiedTypeName name="libPurple.Encoder3075"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.PIDController"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.PIDOutput"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.CANTalon"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.SpeedController"/>
+<fullyQualifiedTypeName name="libPurple.SpeedController3075"/>
 </qualifiedTypeNameHistroy>

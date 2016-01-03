@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="getRate" key="selection"/>
+		<item value="setSet" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="setSet"/>
+			<item value="pidLeft"/>
+			<item value="pidWrite"/>
+			<item value="MoveOne"/>
 			<item value="getRate"/>
 			<item value="kExponantial"/>
 			<item value="mySol"/>
 			<item value="current"/>
-			<item value="requested"/>
-			<item value="x"/>
-			<item value="db"/>
-			<item value="PrettyEqual"/>
 		</list>
 		<list key="replacehistory">
+			<item value="pidLeftDist"/>
 			<item value="Constants.kExponantial"/>
 			<item value="solenoid"/>
 			<item value="currentValue"/>
@@ -25,7 +26,6 @@
 			<item value="value"/>
 			<item value="deadband"/>
 			<item value="Object"/>
-			<item value="driveSystem"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

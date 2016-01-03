@@ -8,11 +8,9 @@ public class Victor3075 extends Victor {
     private double motorBound = 0.05;
     private double accellimit = 1;
     private double deaccellimit = 1;
-   
-
-    
-
     private double lastValue = 0;
+    
+    
 
     public Victor3075(int channel, boolean inverted) {
 		super(channel);
@@ -37,6 +35,7 @@ public class Victor3075 extends Victor {
     @Override
     public void set(double speed) {
     	// TODO Auto-generated method stub
+    	
     	speed = utils.motorBound(speed, motorBound) * inverted;
 //    	speed = utils.accellimit(speed, lastValue, accellimit);
     	super.set(speed);
@@ -58,8 +57,5 @@ public class Victor3075 extends Victor {
     	accellimit = newAccellimit;
     }
     
-    public void setDeAccellimit(double newdeAccellimit)
-    {
-    	deaccellimit = newdeAccellimit;
-    }
+
 }

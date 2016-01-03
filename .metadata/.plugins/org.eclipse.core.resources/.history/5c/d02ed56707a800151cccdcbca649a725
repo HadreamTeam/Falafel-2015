@@ -1,0 +1,52 @@
+package libPurple;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Victor;
+/**
+ *
+ */
+public class DriveSystem3075 extends Subsystem 
+{
+	Victor rearLeft;
+	Victor frontLeft;
+	Victor rearRight;
+	Victor frontRight;
+	
+	Encoder encoder = new Encoder(0, 1);
+	
+	PIDController pid = new PIDController(2, 3, 5, source, output)
+    
+    public DriveSystem3075(Victor rearLeft, Victor frontLeft, Victor rearRight, Victor frontRight)
+    {
+		super();
+		this.rearLeft = rearLeft;
+		this.frontLeft = frontLeft;
+		this.rearRight = rearRight;
+		this.frontRight = frontRight;
+		
+	}
+    
+    public DriveSystem3075(int rearLeft, int frontLeft, int rearRight, int frontRight)
+    {
+		super();
+		this.rearLeft = new Victor(rearLeft);
+		this.frontLeft = new Victor(frontLeft);
+		this.rearRight = new Victor(rearRight);
+		this.frontRight = new Victor(frontRight);
+	}
+
+
+
+	// Put methods for controlling this subsystem
+    // here. Call these from Commands.
+
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    
+}
+

@@ -2,6 +2,8 @@ package libPurple;
 
 import org.usfirst.frc.team3075.robot.Constants;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 public class utils
 {
 	
@@ -78,5 +80,10 @@ public class utils
 	public static double angleDist(double angle)
 	{
 		return (Math.PI*Constants.robotWidth)*(angle/360);
+	}
+	
+	public static void printErr(String err)
+	{
+		DriverStation.reportError(err, true);
 	}
 }
