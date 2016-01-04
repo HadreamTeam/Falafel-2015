@@ -233,7 +233,7 @@ class JoystickArcadeDrive extends Command{
 	{
 		// TODO Auto-generated method stub
 		double y = utils.deadband(-Components.driveStick.getY(), 0.01);
-		double x = utils.deadband(Components.driveStick.getX(), 0.01);
+		double x = Components.driveStick.getX();
 		Robot.driveSystem.setArcadeDrive(y, x);
 		
 	}

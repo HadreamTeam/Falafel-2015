@@ -87,9 +87,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("EncoderRightDistance", Components.driveRightEncoder.getDistance());
 		SmartDashboard.putNumber("JoystickX", Components.driveStick.getX());
 		SmartDashboard.putNumber("JoystickY", Components.driveStick.getY());
-//		SmartDashboard.putNumber("PIDleft", driveSystem.getPIDLeft());
-//		SmartDashboard.putNumber("PIDright", driveSystem.getPIDRight());
-		utils.batteryWatcher();	
+		SmartDashboard.putNumber("PIDleft", driveSystem.getPIDLeft());
+		SmartDashboard.putNumber("PIDright", driveSystem.getPIDRight());
+		utils.batteryWatcher();
     }
     
     /**

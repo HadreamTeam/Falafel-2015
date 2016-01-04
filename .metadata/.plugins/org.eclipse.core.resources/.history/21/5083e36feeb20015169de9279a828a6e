@@ -32,12 +32,11 @@ public class DriveSystem3075 extends Subsystem
 	private PIDController pidLeftRate;
 	private PIDController pidRightRate;
 	
-	
 	private double tolerance = 0.05;
 	
 //	PIDController pidDiffRate;
 	
-	private double maxSpeed = 2;
+	private double maxSpeed = 1;
 	private double accellimit = 1;
 	
 	public void initDefaultCommand() {
@@ -132,7 +131,7 @@ public class DriveSystem3075 extends Subsystem
 
     		SmartDashboard.putNumber("Left pid", pidLeftRate.get());
     		
-    		if(!(utils.inRange(pidLeftRate.get(), 0, tolerance)))
+    		if(!(utils.inRange(pidLeftRate.get(), 0, 0.05)))
     			speed += pidLeftRate.get();
 
     		 	
@@ -151,7 +150,7 @@ public class DriveSystem3075 extends Subsystem
 
     		SmartDashboard.putNumber("Right pid", pidLeftRate.get());
 
-    		if(!(utils.inRange(pidRightRate.get(), 0, tolerance)))
+    		if(!(utils.inRange(pidRightRate.get(), 0, 0.05)))
     			speed += pidRightRate.get();
     		
     	}
@@ -180,14 +179,6 @@ public class DriveSystem3075 extends Subsystem
     
 	public double getMaxSpeed() {
 		return maxSpeed;
-	}
-	
-	public double getTolerance() {
-		return tolerance;
-	}
-
-	public void setTolerance(double tolerance) {
-		this.tolerance = tolerance;
 	}
 
 	/**
@@ -232,9 +223,7 @@ class JoystickArcadeDrive extends Command{
 	protected void execute()
 	{
 		// TODO Auto-generated method stub
-		double y = utils.deadband(-Components.driveStick.getY(), 0.01);
-		double x = utils.deadband(Components.driveStick.getX(), 0.01);
-		Robot.driveSystem.setArcadeDrive(y, x);
+		Robot.driveSystem.setArcadeDrive(-Components.driveStick.getY(), Components.driveStick.getX());
 		
 	}
 
