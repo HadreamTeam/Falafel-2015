@@ -151,11 +151,11 @@ public class DriveSystem extends Subsystem{
 		Components.driveRight.setAccellimit(newAccellimit);
 	}
 	
-	public void setDeAccellimit(double newdeAccellimit)
-	{
-		Components.driveLeft.setDeAccellimit(newdeAccellimit);
-		Components.driveRight.setDeAccellimit(newdeAccellimit);
-	}
+//	public void setDeAccellimit(double newdeAccellimit)
+//	{
+//		Components.driveLeft.setDeAccellimit(newdeAccellimit);
+//		Components.driveRight.setDeAccellimit(newdeAccellimit);
+//	}
 	
 	public void setMotorBound(double newMotorBound)
 	{

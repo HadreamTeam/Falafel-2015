@@ -82,8 +82,27 @@ public class utils
 		return (Math.PI*Constants.robotWidth)*(angle/360);
 	}
 	
+	/**
+	 * Prints an error to DriverStatin with the cause and location
+	 * @param err The error message
+	 */
 	public static void printErr(String err)
 	{
 		DriverStation.reportError(err, true);
+	}
+	
+	/**
+	 * Prints a message to DriverStation
+	 * @param msg The message you want to print
+	 */
+	public static void printToDS(String msg)
+	{
+		DriverStation.reportError(msg, false);
+	}
+	
+	public static void batteryWatcher()
+	{
+		if(DriverStation.getInstance().getBatteryVoltage() < 10)
+			printToDS("Battery is low! (Battery below 10V)");
 	}
 }

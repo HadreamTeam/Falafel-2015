@@ -1,9 +1,6 @@
 package libPurple;
 
-
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.hal.CanTalonSRX;
 
 public class CANTalon3075 extends CANTalon implements SpeedController3075 {
     
@@ -26,14 +23,14 @@ public class CANTalon3075 extends CANTalon implements SpeedController3075 {
 	public CANTalon3075(int channel, CANTalon3075 master)
 	{
 		super(channel);
-		super.changeControlMode(CANTalon.ControlMode.Follower);
+		super.changeControlMode(TalonControlMode.Follower);
 		super.set(master.getDeviceID());
 	}
 	
 	public CANTalon3075(int channel, CANTalon3075 master, boolean inverted)
 	{
 		super(channel);
-		super.changeControlMode(CANTalon.ControlMode.Follower);
+		super.changeControlMode(TalonControlMode.Follower);
 		super.reverseOutput(inverted);
 		this.inverted = inverted ? -1 : 1;
 		super.set(master.getDeviceID());
@@ -82,5 +79,35 @@ public class CANTalon3075 extends CANTalon implements SpeedController3075 {
 	public void setSlaveInverted(boolean inverted)
 	{
 		this.slave.setInverted(inverted);
+	}
+
+	@Override
+	public double get() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void set(double speed, byte syncGroup) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getInverted() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void disable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pidWrite(double output) {
+		// TODO Auto-generated method stub
+		
 	}
 }

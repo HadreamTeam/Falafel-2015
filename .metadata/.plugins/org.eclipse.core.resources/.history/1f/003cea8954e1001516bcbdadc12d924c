@@ -1,0 +1,72 @@
+package org.usfirst.frc.team3075.robot.commands;
+
+import org.usfirst.frc.team3075.robot.Constants;
+import org.usfirst.frc.team3075.robot.Robot;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+
+/**
+ *
+ */
+public class Rotate2Target extends Command {
+    
+    public  Rotate2Target()  {
+           	
+    	
+    	
+    
+    }
+
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		
+    	
+    	
+		try
+		{
+			double x = Robot.imageDetection.getRectangle().getCenter().getX();
+			double absAngle = x / (Math.toRadians(Constants.FOV) * Constants.imageWidth);
+	    	double realAngle = absAngle - Math.toRadians(Constants.FOV)/2;
+	    	realAngle = Math.toDegrees(realAngle) - Constants.errorAngle;
+	    	DriverStation.reportError("\n" + realAngle, false);
+	    	
+			new RotateAngle(-realAngle).start();
+
+	    	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		new RotateAngle(-realAngle).start();
+		
+	}
+
+	@Override
+	protected void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+
+		
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		
+	}
+}

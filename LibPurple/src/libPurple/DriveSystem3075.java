@@ -33,12 +33,12 @@ public class DriveSystem3075 extends Subsystem
 	private PIDController pidRightRate;
 	
 	
-	private double tolerance = 0.05;
+	private double tolerance = 0.1;
 	
 //	PIDController pidDiffRate;
 	
-	private double maxSpeed = 2;
-	private double accellimit = 1;
+	private double maxSpeed = 1.25;
+	private double accellimit = 0.5;
 	
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -149,7 +149,7 @@ public class DriveSystem3075 extends Subsystem
     		pidRightRate.setSetpoint(speed * maxSpeed);
     		SmartDashboard.putNumber("Right Setpoint", speed * maxSpeed);
 
-    		SmartDashboard.putNumber("Right pid", pidLeftRate.get());
+    		SmartDashboard.putNumber("Right pid", pidRightRate.get());
 
     		if(!(utils.inRange(pidRightRate.get(), 0, tolerance)))
     			speed += pidRightRate.get();
@@ -208,6 +208,13 @@ public class DriveSystem3075 extends Subsystem
 		return pidRightRate.get();
 	}
 	
+//	double dpMAX = 0.3;
+//	double dpMIN = 0.1;
+//	public double deadbandPID(double val)
+//	{
+//		if()
+//	}
+	
 	public AutoDrive AutoDrive(double leftDistance, double rightDistance)
 	{
 		return new AutoDrive(this, leftDistance, pidLeftDistance, rightDistance, pidRightDistance);
@@ -232,9 +239,19 @@ class JoystickArcadeDrive extends Command{
 	protected void execute()
 	{
 		// TODO Auto-generated method stub
-		double y = utils.deadband(-Components.driveStick.getY(), 0.01);
-		double x = utils.deadband(Components.driveStick.getX(), 0.01);
+		double y = utils.deadband(-Components.driveStick.getY(), 0.1);
+		double x = utils.deadband(Components.driveStick.getX(), 0.1);
+		
+		// The motors started getting values when the joystick is resting, so we added this.
+		if(y == 0 && x == 0)
+			Robot.driveSystem.disablePID();
+		
+		else 
+			Robot.driveSystem.enablePID();
+		//****stupid code ends here****
+		
 		Robot.driveSystem.setArcadeDrive(y, x);
+
 		
 	}
 
@@ -332,7 +349,7 @@ class AutoDrive extends Command{
 	protected void execute() {
 		// TODO Auto-generated method stub
 		if(pidDiff != null)
-			driveSystem.setTankDrive(pidLeftDistance.get() - pidDiff.get(), pidRightDistance.get() + pidDiff.get());
+			driveSystem.setTankDrive(pidLeftDistance.get() + pidDiff.get(), pidRightDistance.get() + pidDiff.get());
 		else driveSystem.setTankDrive(pidLeftDistance.get(), pidRightDistance.get());
 	}
 

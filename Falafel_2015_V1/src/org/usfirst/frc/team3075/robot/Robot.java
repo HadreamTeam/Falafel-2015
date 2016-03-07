@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import libPurple.utils;
 
 import org.usfirst.frc.team3075.robot.commands.AutonomusCommand;
 import org.usfirst.frc.team3075.robot.commands.DriveDistance;
@@ -118,6 +119,7 @@ public class Robot extends IterativeRobot {
         {
         	Components.portableTargetServo.setAngle(-90);
         }
+        utils.batteryWatcher();
     }
     
     /**

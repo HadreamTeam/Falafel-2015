@@ -34,10 +34,10 @@ public class JoyStickArcadeDrive extends Command {
 	@Override
 	protected void execute() {
 		
-		valueX = Components.driveStick.axisGet(0);
+		valueX = Components.driveStick.axisGet(0) * 0.5;
 //		valueX = utils.accellimit(valueX, lastValueX, Constants.kAccelimit);
 		
-		valueY = Components.driveStick.axisGet(1);
+		valueY = Components.driveStick.axisGet(1) * 0.5;
 //		valueY = utils.accellimit(valueY, lastValueY, Constants.kAccelimit);
 		
 		Robot.drive.arcadeDrive(-valueY, valueX);

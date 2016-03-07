@@ -99,6 +99,7 @@ public class Components {
 	 
 	 
 	 public static void init() {
+		 
 		 Robot.drive = new DriveSystem();
 	 	 Robot.shooter = new Shooter();
 	 	 Robot.conveyor = new Conveyor();

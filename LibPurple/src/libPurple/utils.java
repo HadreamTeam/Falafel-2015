@@ -114,6 +114,12 @@ public class utils
 		return arr;
 	}
 	
+//	public static double calculateDistance(Point[] p)
+//	{
+//		h1 = 
+//		
+//	}
+	
 //	public static double[] driveCurve(double radius, double distance, double robotWidth, boolean no)
 //	{
 //		double[] arr = {(radius-robotWidth/2)*distance/radius, (radius+robotWidth/2)*distance/radius};

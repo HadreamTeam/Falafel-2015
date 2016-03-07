@@ -1,0 +1,199 @@
+package org.usfirst.frc.team3075.robot.subsystems;
+
+import org.usfirst.frc.team3075.robot.Components;
+import org.usfirst.frc.team3075.robot.Constants;
+import org.usfirst.frc.team3075.robot.Robot;
+
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import libPurple.PIDGetEncoder;
+import libPurple.utils;
+
+/**
+ *
+ */
+public class Shooter extends Subsystem {
+    
+    // Put methods for controlling this subsystem
+    // here. Call these from Commands.
+	
+	private PIDController top;
+	private PIDController bottom;
+	
+	private PIDGetEncoder shooterTopEncoder;
+	private PIDGetEncoder shooterBottomEncoder;
+
+	
+	public Shooter()
+	{
+		shooterBottomEncoder = new PIDGetEncoder(Components.shooterBottomEncoder, true);
+		shooterTopEncoder = new PIDGetEncoder(Components.shooterTopEncoder, true);
+		
+		top = new PIDController(Constants.shooterPID.kP,Constants.shooterPID.kI,
+				Constants.shooterPID.kD, shooterTopEncoder, Components.shooterTop);
+		
+		bottom = new PIDController(Constants.shooterPID.kP,Constants.shooterPID.kI,
+				Constants.shooterPID.kD, shooterBottomEncoder, Components.shooterBottom);
+		
+		top.setOutputRange(-1, 1);
+		bottom.setOutputRange(-1, 1);
+
+	
+	
+	}
+
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        setDefaultCommand(new ManualShooter());
+    }
+    
+    public void setSpeed(double speed)
+    {
+    		
+    }
+    
+    public void setSpeed(double topSpeed, double bottomSpeed)
+    {
+    	Components.shooterTop.set(top.get());
+    }
+    
+    public Command setShooterSpeed(double topSpeed, double bottomSpeed)
+    {
+    	return new SetShooterSpeed(topSpeed, bottomSpeed);
+    }
+    
+    public void setRaw(double speed)
+    {
+    	Components.shooterTop.changeControlMode(TalonControlMode.PercentVbus);
+		Components.shooterBottom.changeControlMode(TalonControlMode.PercentVbus);
+    	Components.shooterTop.set(speed);
+    	Components.shooterBottom.set(speed);
+    }
+    
+    public void setRaw(double top, double bottom)
+    {
+    	Components.shooterTop.changeControlMode(TalonControlMode.PercentVbus);
+		Components.shooterBottom.changeControlMode(TalonControlMode.PercentVbus);
+    	Components.shooterTop.set(top);
+    	Components.shooterBottom.set(bottom);
+    }
+    
+    
+    public void enablePID()
+    {
+    	Components.shooterTop.enableControl();
+		Components.shooterBottom.enableControl();
+    }
+    
+    public void disablePID()
+    {
+    	Components.shooterTop.disableControl();
+		Components.shooterBottom.disableControl();
+    }
+}
+
+class ManualShooter extends Command
+{
+	
+	public ManualShooter() {
+		// TODO Auto-generated constructor stub
+		requires(Robot.shooter);
+	}
+	
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+//		utils.requires(this, Components.systemStick);
+		Robot.shooter.disablePID();
+		
+	}
+
+	@Override
+	protected void execute() {
+		// TODO Auto-generated method stub
+//		Robot.shooter.disablePID();
+//		Robot.shooter.setRaw(-Components.systemStick.getRawAxis(3));
+		Robot.shooter.setRaw((1 - Components.systemStick.getRawAxis(3)) / 2);
+		
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
+
+class SetShooterSpeed extends Command
+{
+	private double topSpeed;
+	private double bottomSpeed;
+	
+	public SetShooterSpeed(double topSpeed, double bottomSpeed) {
+		// TODO Auto-generated constructor stub
+		this.topSpeed = topSpeed;
+		this.bottomSpeed = bottomSpeed;
+		requires(Robot.shooter);
+	}
+	
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		Robot.shooter.enablePID();
+
+		
+	}
+
+	@Override
+	protected void execute() {
+		// TODO Auto-generated method stub
+		Robot.shooter.setSpeed(topSpeed, bottomSpeed);
+		SmartDashboard.putNumber("shooter bottom speed", Components.shooterBottom.getSpeed());
+//		Robot.shooter.setSpeed(SmartDashboard.getNumber("Speed Shooter"));
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+//		Robot.shooter.setSpeed(0);
+//		Robot.shooter.disablePID();
+		
+	}
+	
+}
+
+
+
+
+

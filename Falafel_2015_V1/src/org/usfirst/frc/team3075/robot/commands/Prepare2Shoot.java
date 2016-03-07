@@ -38,6 +38,8 @@ public class Prepare2Shoot extends Command {
     {
     	Robot.shooter.setWheelsSpeed(speed);
     	
+    	
+    	
     	SmartDashboard.putNumber("Time 2 Shoot", timeSinceInitialized());
     	SmartDashboard.putBoolean("Ready to Shoot", isTimedOut());
     	    	

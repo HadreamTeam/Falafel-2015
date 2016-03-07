@@ -1,0 +1,81 @@
+package org.usfirst.frc.team3075.robot.commands;
+
+import java.sql.DriverAction;
+
+import org.usfirst.frc.team3075.robot.Components;
+import org.usfirst.frc.team3075.robot.Robot;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+/**
+ *
+ */
+public class PrepareTrajectory extends Command {
+
+	private double x;
+	private double speed = 0;
+	
+    public PrepareTrajectory() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.shooter);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	
+		Robot.shooter.enablePID();
+
+    	
+    	try {
+			x = Robot.imageDetection.getRectangle().getHeight();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			x = -1;
+			DriverStation.reportError("FUCKKKK NO IMAGEEE", false);
+		}
+    	
+    	if(x > 20)
+    	{
+    		Components.shooterAnglePiston.set(Value.kReverse);
+        	speed = 0.00541687415*Math.pow(x, 3) - 0.2804239106*Math.pow(x, 2) + 4.438279681*x - 8.330706472;
+    	}
+    	else
+    	{
+    		
+    		
+    		Components.shooterAnglePiston.set(Value.kForward);
+    		speed = 0.00653673*Math.pow(x, 5) - 0.48663*Math.pow(x, 4) + 14.4011*Math.pow(x, 3) - 211.733*Math.pow(x, 2) + 1546.18*x - 4472.14;
+    	}
+    	
+    	
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+
+    	SmartDashboard.putNumber("Shooter Setpoint", speed);
+    	SmartDashboard.putNumber("Shooter height", x);
+
+    	Robot.shooter.setSpeed(speed);
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    	
+    	Robot.shooter.setSpeed(0);
+    }
+}

@@ -1,0 +1,78 @@
+package org.usfirst.frc.team3075.robot;
+
+import libPurple.PIDvalue;
+
+public class Constants
+{
+	
+	//Robot B Constants
+	
+//	public static final PIDvalue shooterBottomPID = new PIDvalue(0.015, 0.0025, 0.1);
+//	public static final PIDvalue shooterTopPID = new PIDvalue(0.009, 0.0015, 0.08);
+//
+//	public static final double shiftingSpeed = 1.5;
+//	
+//	public static final PIDvalue drivePID = new PIDvalue(1, 0, 0);
+//	
+//	public static final PIDvalue driveDistanceLeftPID = new PIDvalue(2, 0.005, 0.01);
+//	public static final PIDvalue driveDistanceRightPID = driveDistanceLeftPID;
+//	
+////	public static final double void enum this abstract implements extends interface super class private protected package import float int char boolean byte long short new return synchronized continue break switch while for if else do case default finally assert null throw try catch 
+//	
+//	public static final double driveOutputRange = 0.35;
+//	
+//	public static final double toleranceRate = 0.1;
+//	public static final double toleranceDistance = 0.01;
+//	
+//	public static final double rightDistancePerPulse = 11822;
+//	public static final double leftDistancePerPulse = 11558;
+//	
+//	public static final double shooterBallInsertTopSpeed = 7.5;
+//	public static final double shooterBallInsertBottomSpeed = 7.5;
+//	
+//	public static final double shooterMaxSpeed = 16000;
+//
+//	public static final double centerOnTargetP = 0.01;
+//	public static final double centerOnTargetI = 0.000135;
+//	public static final double centerOnTargetTolerance = 2.5;
+//	public static final double centerOnTargetOutputRange = 0.42;
+//	
+	
+	
+	
+	
+	
+	//Robot A Constants
+	
+	public static final PIDvalue shooterTopPID = new PIDvalue(0.008, 0.0011, 0.05);
+	public static final PIDvalue shooterBottomPID = new PIDvalue(0.008, 0.0014, 0.05);
+	
+	public static final double shiftingSpeed = 1.5;
+	
+	public static final PIDvalue drivePID = new PIDvalue(1, 0, 0);
+	
+	public static final PIDvalue driveDistanceLeftPID = new PIDvalue(2, 0.005, 0.01);
+	public static final PIDvalue driveDistanceRightPID = driveDistanceLeftPID;
+	
+//	public static final double void enum this abstract implements extends interface super class private protected package import float int char boolean byte long short new return synchronized continue break switch while for if else do case default finally assert null throw try catch 
+	
+	public static final double driveOutputRange = 0.35;
+	
+	public static final double centerTarget = 310;
+	
+	public static final double toleranceRate = 0.1;
+	public static final double toleranceDistance = 0.01;
+	
+	public static final double rightDistancePerPulse = 11822;
+	public static final double leftDistancePerPulse = 11558;
+	
+	public static final double shooterBallInsertTopSpeed = 7.5;
+	public static final double shooterBallInsertBottomSpeed = 7.5;
+	
+//	public static final double shooterMaxSpeed = 16000;
+
+	public static final double centerOnTargetP = 0.0019;
+	public static final double centerOnTargetI = 0.00000;
+	public static final double centerOnTargetTolerance = 5;
+	public static final double centerOnTargetOutputRange = 0.37;
+}

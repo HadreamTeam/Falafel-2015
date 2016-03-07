@@ -1,0 +1,102 @@
+
+package org.usfirst.frc.team3075.robot;
+
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.SerialPort;
+
+
+/**
+ * This is a demo program showing the use of the RobotDrive class.
+ * The SampleRobot class is the base of a robot application that will automatically call your
+ * Autonomous and OperatorControl methods at the right time as controlled by the switches on
+ * the driver station or the field controls.
+ *
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to each mode, as described in the SampleRobot
+ * documentation. If you change the name of this class or the package after
+ * creating this project, you must also update the manifest file in the resource
+ * directory.
+ *
+ * WARNING: While it may look like a good choice to use for your code if you're inexperienced,
+ * don't. Unless you know what you are doing, complex code will be much more difficult under
+ * this system. Use IterativeRobot or Command-Based instead if you're new.
+ */
+public class Robot extends SampleRobot {
+//    RobotDrive myRobot;
+//    Joystick stick1;
+//    Joystick stick2;
+    
+//    I2C i2c;
+    SerialPort serial;
+    Joystick stick;
+    
+//    SpeedController3075 victor1; // add more of this for victors
+//    CANTalon3075 talon1; // add more of this for talons
+//    
+//    EncoderDIO3075 encoder1; // Remove the "//" at the start of this line for an encoder that is connected to RoboRIO.
+//    EncoderTalon3075 talonEncoder; // for encoder that is connected to a talon.
+
+    public Robot() {
+//        myRobot = new RobotDrive(0, 1);
+//        myRobot.setExpiration(0.1);
+//        stick1 = new Joystick(0);
+//        stick2 = new Joystick(1);
+//        i2c = new I2C(Port.kOnboard, 168);
+        serial = new SerialPort(9600, edu.wpi.first.wpilibj.SerialPort.Port.kUSB);
+        stick = new Joystick(0);
+        
+//        victor1 = new Victor3075(0); // add more of this for victors, number in brackets is port
+//        talon1 = new CANTalon3075(0); // add more of this for talons, number in brackets is CAN
+//        
+//        talonEncoder = new EncoderTalon3075(talon1); // choose the talon that the encoder is connected to.
+        //encoder1 = new EncoderDIO3075(0, 1, true, EncoderDIO3075.k4x); //remove the "//" for DIO encoder. 0, 1 = DIO.
+        //true = is reversed ( change to false)
+    }
+
+    /**
+     * Drive left & right motors for 2 seconds then stop
+     */
+    public void autonomous() {
+//        myRobot.setSafetyEnabled(false);
+//        myRobot.drive(-0.5, 0.0);	// drive forwards half speed
+//        Timer.delay(2.0);		//    for 2 seconds
+//        myRobot.drive(0.0, 0.0);	// stop robot
+    }
+
+    /**
+     * Runs the motors with arcade steering.
+     */
+    public void operatorControl() {
+//        myRobot.setSafetyEnabled(true);
+//        while (isOperatorControl() && isEnabled()) {
+//            myRobot.arcadeDrive(stick1); // drive with arcade style (use right stick)
+//            Timer.delay(0.005);		// wait for a motor update time
+//        }
+    	
+//    	victor1.set(stick1.getX()); // will set stick #1 X value to victor #1
+//    	talon1.set(stick1.getY()); // will set stick #1 Y value to talon #1
+    	
+    	
+    	while(true)
+    	{
+    		if(stick.getZ() > 0.5)
+    		{
+    			try
+    			{
+    				serial.writeString(stick.getZ() > 0.5 ? "1" : "0");
+    			} catch(Exception e)
+    			{
+    				System.out.println("gg nupity");
+    			}
+    		}
+    	}
+    }
+
+    /**
+     * Runs during test mode
+     */
+    public void test() {
+    }
+}

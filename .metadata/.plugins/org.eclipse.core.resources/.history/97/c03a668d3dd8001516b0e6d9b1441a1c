@@ -1,0 +1,50 @@
+package org.usfirst.frc.team3075.robot.commands;
+
+import org.usfirst.frc.team3075.robot.Constants;
+import org.usfirst.frc.team3075.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+/**
+ *
+ */
+public class CenterOnTarget extends Command {
+	
+	double error = 0;
+	
+    public CenterOnTarget() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.driveSystem);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	try {
+			error = Robot.imageDetection.getRectangle().getCenter().getX() - 162.5;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Robot.driveSystem.setArcadeDrive(0, Math.min(Math.max((error)*Constants.centerOnTargetP, -Constants.centerOnTargetOutputRange), Constants.centerOnTargetOutputRange));
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return Math.abs(error) < Constants.centerOnTargetTolerance;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    	Robot.driveSystem.setArcadeDrive(0, 0);
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    	end();
+    }
+}

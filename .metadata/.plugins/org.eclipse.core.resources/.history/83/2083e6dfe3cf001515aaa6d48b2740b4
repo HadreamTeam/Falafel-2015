@@ -1,0 +1,38 @@
+package org.usfirst.frc.team3075.robot;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
+
+public class ImageDetection3075 {
+	
+	private NetworkTable server;
+	
+	public ImageDetection3075()
+	{
+		server = NetworkTable.getTable("SmartDashboard");
+	}
+	
+	public Point[] lineCorner()
+	{
+		if(!server.containsKey("LINE_CORNER"))
+		{
+			DriverStation.reportError("NOT FOUND****************************", false);
+			return null;
+		}
+		
+		double[] vals = server.getNumberArray("LINE_CORNER");
+		DriverStation.reportError("How can this not be a trap?", false);
+		Point[] res = new Point[vals.length / 2];
+		for(int i = 0; i < vals.length; i += 2)
+			res[i / 2] = new Point(vals[i], vals[i + 1]);
+		return res;
+	}
+	
+	public Rectangle getRectangle()
+	{
+		return new Rectangle(lineCorner());
+	}
+
+}

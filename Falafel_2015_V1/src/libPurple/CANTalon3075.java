@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.hal.CanTalonSRX;
 
-public class CANTalon3075 extends CANTalon implements SpeedController3075 {
+public class CANTalon3075 extends CANTalon{
     
     private double motorBound = 0;
     private int inverted = 1;

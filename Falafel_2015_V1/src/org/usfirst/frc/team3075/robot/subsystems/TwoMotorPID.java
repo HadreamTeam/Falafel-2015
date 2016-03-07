@@ -89,11 +89,11 @@ public class TwoMotorPID extends PIDSubsystem {
     	frontMotor.setAccellimit(newAccellimit);
     }
     
-    public void setDeAccellimit(double newdeAccellimit)
-    {
-    	rearMotor.setDeAccellimit(newdeAccellimit);
-    	frontMotor.setDeAccellimit(newdeAccellimit);
-    }
+//    public void setDeAccellimit(double newdeAccellimit)
+//    {
+//    	rearMotor.setDeAccellimit(newdeAccellimit);
+//    	frontMotor.setDeAccellimit(newdeAccellimit);
+//    }
     
     public void setMotorBound(double newMotorBound)
     {

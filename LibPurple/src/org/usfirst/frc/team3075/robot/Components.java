@@ -28,11 +28,11 @@ public class Components {
 	
 	public static void init() {
 		left = new Victor3075[2];
-		left[0] = new Victor3075(1);
-		left[1] = new Victor3075(2);
+		left[0] = new Victor3075(0);
+		left[1] = new Victor3075(1);
 		right = new Victor3075[2];
-		right[0] = new Victor3075(3);
-		right[1] = new Victor3075(0);
+		right[0] = new Victor3075(2);
+		right[1] = new Victor3075(3);
 		left[0].setInverted(true);
 		left[1].setInverted(true);
 		
@@ -48,7 +48,7 @@ public class Components {
 		driveRightEncoder.setDistancePerPulse(Constants.driveDistancePerPulseRight);
 		
 		Robot.driveSystem = new DriveSystem3075(left, driveLeftEncoder, right, driveRightEncoder);
-		Robot.driveSystem.setPID(0.07, 0, 0);
+		Robot.driveSystem.setPID(0.35, 0.0003, 0.5);
 		Robot.driveSystem.enablePID();
 	}
 }

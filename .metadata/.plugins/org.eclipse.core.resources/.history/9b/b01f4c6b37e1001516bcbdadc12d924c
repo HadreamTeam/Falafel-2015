@@ -1,0 +1,17 @@
+package libPurple;
+
+import org.usfirst.frc.team3075.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+
+/**
+ *
+ */
+public class AutonomousTest extends CommandGroup {
+
+    public AutonomousTest()
+    {
+    	addSequential(Robot.driveSystem.AutoDrive(1,1), 3);
+    }
+}

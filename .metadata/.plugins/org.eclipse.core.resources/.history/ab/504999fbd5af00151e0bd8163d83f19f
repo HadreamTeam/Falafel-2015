@@ -1,9 +1,0 @@
-package libPurple;
-
-public interface Encoder3075 {
-	
-	public double get();
-	
-	public void invert(boolean inverted);
-
-}
