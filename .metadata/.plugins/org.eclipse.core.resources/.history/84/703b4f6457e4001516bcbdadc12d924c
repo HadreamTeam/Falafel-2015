@@ -184,7 +184,7 @@ public class Components
 //		button2.whenPressed(bigArmPiston.ToggleCommand());
 		
 		button2 = new JoystickButton(driveStick, 3);
-		button2.toggleWhenPressed(new OpenRisingGate());
+//		button2.toggleWhenPressed(new OpenRisingGate());
 		
 		button3 = new JoystickButton(systemStick, 3);
 		button3.whenPressed(ballPusher.TimedCycle(0.5));
@@ -193,7 +193,7 @@ public class Components
 //		button4 = new JoystickButton(systemStick, 4);
 //		button4.whenPressed(shooterAnglePiston.ToggleCommand());
 		button4 = new JoystickButton(driveStick, 4);
-		button4.whenPressed(new OpenFallingGate());
+//		button4.whenPressed(new OpenFallingGate());
 		 
 		button5 = new JoystickButton(systemStick, 5);
 		button5.whileHeld(Robot.winch.rotateWinch());

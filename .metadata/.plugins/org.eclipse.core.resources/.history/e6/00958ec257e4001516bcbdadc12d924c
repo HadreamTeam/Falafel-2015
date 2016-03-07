@@ -24,6 +24,7 @@ public class OpenRisingGate extends CommandGroup {
     	addSequential(Components.smallArmPiston.CloseCommand());
     	addSequential(Robot.driveSystem.AutoDrive(0.5, 0.5), 1.5);
     	addParallel(Robot.bigArms.close(), 1.5);
+    	addSequential(Robot.driveSystem.AutoDrive(0.3, 0.3), 1);
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

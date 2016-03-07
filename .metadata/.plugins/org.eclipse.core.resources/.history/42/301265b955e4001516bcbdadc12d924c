@@ -29,7 +29,7 @@ public class CenterOnTarget extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Components.cameraServoAngle.setAngle(Constants.shootAngle);
-    	output = Constants.centerOnTargetOutputRange;  
+    	output = error < 0 ? Constants.centerOnTargetOutputRangeL : Constants.centerOnTargetOutputRangeR;  
     	try {
 			initError = Robot.imageDetection.getRectangle().getCenter().getX() - Constants.centerTarget;
 		} catch (Exception e) {

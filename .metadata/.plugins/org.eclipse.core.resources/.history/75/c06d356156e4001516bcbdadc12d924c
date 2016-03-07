@@ -75,7 +75,7 @@ public class Robot extends IterativeRobot {
         CameraServer.getInstance().startAutomaticCapture(c);
 //        CameraServer.getInstance().startAutomaticCapture("cam0");
         imageDetection = new ImageDetection3075();
-    	Components.cameraServoAngle.setAngle(Constants.shootAngle);
+        
     }
 	
 	/**
@@ -101,7 +101,6 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	Components.cameraServoAngle.setAngle(Constants.shootAngle);
         autonomousCommand = (Command) chooser.getSelected();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");

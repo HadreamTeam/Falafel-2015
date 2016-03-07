@@ -82,8 +82,10 @@ public class Constants
 	public static final double centerOnTargetI = (0.0006) ;
 	public static final double centerOnTargetD = 0.013 ;
 	public static final double centerOnTargetTolerance = 1;
+	public static final double centerOnTargetOutputRangeR = 0.25;
 	public static final double centerOnTargetOutputRange = 0.35;
 
+	public static final double centerOnTargetOutputRangeL = 0.4;
 	
 	public static final double rotate90Deg = 0.46;
 	
