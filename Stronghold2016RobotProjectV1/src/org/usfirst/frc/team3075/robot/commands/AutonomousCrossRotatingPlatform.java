@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutonomousCrossRotatingPlatform extends CommandGroup {
 	
-	private static double myDistance = Constants.autonomousDistance - 0.8;
+	private static double myDistance = Constants.autonomousDistance - 1;
     
     public  AutonomousCrossRotatingPlatform() {
         // Add Commands here:
@@ -39,6 +39,6 @@ public class AutonomousCrossRotatingPlatform extends CommandGroup {
     	addParallel(Robot.driveSystem.AutoDrive(2.2, 2.2), 2);
     	addSequential(new Wait(), 1);
     	addSequential(Components.smallArmPiston.CloseCommand());
-    	addParallel(new ShootAndEject());
+//    	addParallel(new ShootAndEject());
     }
 }

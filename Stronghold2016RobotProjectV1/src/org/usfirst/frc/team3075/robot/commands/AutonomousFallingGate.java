@@ -19,7 +19,7 @@ public class AutonomousFallingGate extends CommandGroup {
     	addSequential(Robot.driveSystem.AutoDrive(myDistance, myDistance), 2);
     	addSequential(new OpenFallingGate());
     	addSequential(Robot.driveSystem.AutoDrive(3.5, 3.5), 3);
-    	addParallel(new ShootAndEject());
+//    	addParallel(new ShootAndEject());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

@@ -62,25 +62,31 @@ public class Constants
 	
 	public static final double driveOutputRange = 0.35;
 	
-	public static final double centerTarget = 302;
+	public static final double centerTarget = 320;
 	
 	public static final double toleranceRate = 0.1;
 	public static final double toleranceDistance = 0.003;
 //	
-	public static final double rightDistancePerPulse = 11822;
-	public static final double leftDistancePerPulse = 11558;
+//	public static final double rightDistancePerPulse = 11822;
+//	public static final double leftDistancePerPulse = 11558;
 //	
-//	public static final double rightDistancePerPulse = 1;
-//	public static final double leftDistancePerPulse = 1;
+	public static final double rightDistancePerPulse = 11554;
+	public static final double leftDistancePerPulse = 11121;
 	
 	public static final double shooterBallInsertTopSpeed = 7.5;
 	public static final double shooterBallInsertBottomSpeed = 7.5;
 	
 //	public static final double shooterMaxSpeed = 16000;
 
-	public static final double centerOnTargetP = 0.008;
-	public static final double centerOnTargetI = (0.0006) ;
-	public static final double centerOnTargetD = 0.013 ;
+//	public static final double centerOnTargetP = 0.008;
+//	public static final double centerOnTargetI = (0.0006) ;
+//	public static final double centerOnTargetD = 0.013 ;
+//	public static final double centerOnTargetTolerance = 1;
+//	public static final double centerOnTargetOutputRange = 0.35;
+	
+	public static final double centerOnTargetP = 0.004;
+	public static final double centerOnTargetI = (0.0002) ;
+	public static final double centerOnTargetD = 0.015 ;
 	public static final double centerOnTargetTolerance = 1;
 	public static final double centerOnTargetOutputRange = 0.35;
 
@@ -94,12 +100,12 @@ public class Constants
 	public static final double errorAngle = -4.247;
 	
 	
-	public static final double accellimit = 0.06;
+	public static final double accellimit = 0.1;
 	
 	public static final double shootAngle = 175;
-	public static final double insertAngle = 125;
+	public static final double insertAngle = 120;
 	
-	public static final double autonomousDistance = 1.8;
+	public static final double autonomousDistance = 1.9;
 	
 	public static final double frontLimit = 0.8;
 	public static final double backLimit = -0.4;

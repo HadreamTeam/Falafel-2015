@@ -39,18 +39,21 @@ public class PrepareTrajectory extends Command {
 			DriverStation.reportError("FUCKKKK NO IMAGEEE", false);
 		}
     	
-    	if(x > 40)
+    	if(x > 50)
     	{
     		Components.shooterAnglePiston.set(Value.kForward);
 //        	speed = 0.00541687415*Math.pow(x, 3) - 0.2804239106*Math.pow(x, 2) + 4.438279681*x - 8.330706472;
 //    		speed = 0.001905844699*Math.pow(x, 3) - 0.2683710627*Math.pow(x, 2) + 12.49468887*x - 180.745432;
-    		speed = 0.00009974505971*Math.pow(x, 4) - 0.01754405894*Math.pow(x, 3) + 1.150368526*Math.pow(x, 2) - 33.40413406*x + 374.86;
+    		//latest V
+//    		speed = 0.00009974505971*Math.pow(x, 4) - 0.01754405894*Math.pow(x, 3) + 1.150368526*Math.pow(x, 2) - 33.40413406*x + 374.86;
+    		speed = 0.009109627*Math.pow(x, 2)	-1.063691155*x + 41.54026722;
     	}
     	else
     	{
     		Components.shooterAnglePiston.set(Value.kReverse);
 //        	speed = 0.0102916*Math.pow(x/2, 4) - 0.645704*Math.pow(x/2, 3) + 15.1497*Math.pow(x/2, 2) - 157.584*x/2 + 625.962;
-    		speed = -0.000407011*Math.pow(x, 4) + 0.0603283*Math.pow(x, 3) - 3.32736*Math.pow(x, 2) + 80.9212*x - 717.927;
+//    		speed = -0.000407011*Math.pow(x, 4) + 0.0603283*Math.pow(x, 3) - 3.32736*Math.pow(x, 2) + 80.9212*x - 717.927;
+    		speed = 19;
     	}
     	
     	

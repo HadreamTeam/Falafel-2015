@@ -46,7 +46,7 @@ public class AutonomousRisingGate extends CommandGroup {
     	addSequential(new OpenRisingGate());
     	addSequential(Robot.driveSystem.AutoDrive(1.5, 1.5), 2);
     	addSequential(Robot.bigArms.open(), 1.5);
-    	addParallel(new ShootAndEject());
+//    	addParallel(new ShootAndEject());
 
     	
     }

@@ -83,6 +83,8 @@ public class Components
 	 public static JoystickButton button13;
 	 public static JoystickButton button14;
 	 public static JoystickButton button15;
+	 public static JoystickButton button16;
+
 	 
 	 public static Joystick3075 systemStick;
 	 public static Joystick3075 driveStick;
@@ -90,32 +92,32 @@ public class Components
 	public static void init()
 	{
 		//Drive Variables for robot A (yaani competing robot)
-//		leftFront = new CANTalon3075(4);
-//    	leftFront.setInverted(false);
-//    	leftMiddle = new CANTalon3075(5);
-//    	leftMiddle.setInverted(true);
-//    	leftRear = new CANTalon3075(3);
-//    	leftRear.setInverted(false);
-//    	
-//    	rightFront = new CANTalon3075(7);
-//    	rightFront.setInverted(false);
-//    	rightMiddle = new CANTalon3075(6);
-//    	rightMiddle.setInverted(true);
-//    	rightRear = new CANTalon3075(8);
-//    	rightRear.setInverted(true);
-		
-		//Robot B 
 		leftFront = new CANTalon3075(4);
     	leftFront.setInverted(false);
     	leftMiddle = new CANTalon3075(5);
+    	leftMiddle.setInverted(true);
     	leftRear = new CANTalon3075(3);
-    	leftRear.setInverted(true);
+    	leftRear.setInverted(false);
     	
     	rightFront = new CANTalon3075(7);
-    	rightFront.setInverted(true);
+    	rightFront.setInverted(false);
     	rightMiddle = new CANTalon3075(6);
     	rightMiddle.setInverted(true);
     	rightRear = new CANTalon3075(8);
+    	rightRear.setInverted(true);
+		
+		//Robot B 
+//		leftFront = new CANTalon3075(4);
+//    	leftFront.setInverted(false);
+//    	leftMiddle = new CANTalon3075(5);
+//    	leftRear = new CANTalon3075(3);
+//    	leftRear.setInverted(true);
+//    	
+//    	rightFront = new CANTalon3075(7);
+//    	rightFront.setInverted(true);
+//    	rightMiddle = new CANTalon3075(6);
+//    	rightMiddle.setInverted(true);
+//    	rightRear = new CANTalon3075(8);
 				
 		rightDriveEncoder = new EncoderTalon3075(rightMiddle);
 		rightDriveEncoder.reset();
@@ -140,7 +142,7 @@ public class Components
 
 		
 		//Pistons
-		smallArmPiston = new Solenoid3075(0, 1);
+		smallArmPiston = new Solenoid3075(1, 0);
 		bigArmPiston  = new Solenoid3075(11, 3, 2);
 		ballPusher = new Solenoid3075(6, 7);
 		shooterAnglePiston = new Solenoid3075(2, 3);
@@ -184,7 +186,7 @@ public class Components
 //		button2.whenPressed(bigArmPiston.ToggleCommand());
 		
 		button2 = new JoystickButton(driveStick, 3);
-		button2.toggleWhenPressed(new OpenRisingGate());
+//		button2.toggleWhenPressed(new OpenRisingGate());
 		
 		button3 = new JoystickButton(systemStick, 3);
 		button3.whenPressed(ballPusher.TimedCycle(0.5));
@@ -226,13 +228,19 @@ public class Components
 		button13 = new JoystickButton(driveStick, 7);
 		button13.whenPressed(cameraServoAngle.ButtonToggle(Constants.shootAngle, Constants.insertAngle));
 		
+		button15 = new JoystickButton(systemStick, 8);
+		button15.toggleWhenPressed(Components.shooterAnglePiston.OpenCommand());
+		
+
+		button14 = new JoystickButton(systemStick, 12);
+		button14.toggleWhenPressed(Components.shooterAnglePiston.CloseCommand());
 		
 		
-//		button7 = new JoystickButton(systemStick, 7);
-//		button7.toggleWhenPressed(new GearUp());
+		button7 = new JoystickButton(driveStick, 6);
+		button7.toggleWhenPressed(Components.shifter.ToggleCommand());
 //		
-//		button8 = new JoystickButton(systemStick, 8);
-//		button8.toggleWhenPressed(new GearDown());
+		button16 = new JoystickButton(driveStick, 3);
+		button16.toggleWhenPressed(Robot.shooter.setShooterSpeed(11.6, 11.6));
 		
 	}
 }

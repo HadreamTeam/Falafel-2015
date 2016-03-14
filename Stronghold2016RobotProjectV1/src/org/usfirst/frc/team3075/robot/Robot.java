@@ -2,6 +2,7 @@
 package org.usfirst.frc.team3075.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,6 +24,7 @@ import org.usfirst.frc.team3075.robot.subsystems.Winch;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.vision.USBCamera;
+import libPurple.AnalogPressureSensor;
 import libPurple.DriveSystem3075;
 import libPurple.ImageDetection3075;
 import libPurple.Rectangle;
@@ -44,6 +46,7 @@ public class Robot extends IterativeRobot {
 	public static BigArms bigArms;
     public static ImageDetection3075 imageDetection;
     public static USBCamera c;
+    public static AnalogPressureSensor pressure;
 
     
 
@@ -56,9 +59,11 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	Components.init();
+    	pressure = new AnalogPressureSensor(0);
     	driveSystem.disablePID();
         chooser = new SendableChooser();
         chooser.addDefault("Don't do anything", new Wait());
+//        chooser.addObject("Drive - no traps!", Robot.driveSystem.AutoDrive(1, 1));
         chooser.addObject("Drive - no traps!", Robot.driveSystem.AutoDrive(Constants.autonomousDistance, Constants.autonomousDistance));
         chooser.addObject("Shoot without moving", new ShootAndEject());
         chooser.addObject("Falling bridge", new AutonomousFallingGate());
@@ -70,12 +75,14 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Auto modeses", chooser);
         c = new USBCamera("cam0");
         c.setBrightness(7);
+        CameraServer.getInstance().startAutomaticCapture(c);
 //        c.setWhiteBalanceHoldCurrent();
 //        c.setExposureManual(Preferences.getInstance().getInt("exp", 0));
-        CameraServer.getInstance().startAutomaticCapture(c);
 //        CameraServer.getInstance().startAutomaticCapture("cam0");
         imageDetection = new ImageDetection3075();
     	Components.cameraServoAngle.setAngle(Constants.shootAngle);
+    	
+    	Components.shifter.set(Value.kForward);
     }
 	
 	/**
@@ -84,10 +91,28 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+    	try
+    	{
+    		if(c==null)
+			{
+		    	c = new USBCamera("cam0");
+		        c.setBrightness(7);
+		        CameraServer.getInstance().startAutomaticCapture(c);
+			}
+    	} catch(Exception e){}
     }
 	
 	public void disabledPeriodic() {
+		try
+    	{
+			SmartDashboard.putNumber("Pressure", pressure.readPressure());
+			if(c==null)
+			{
+		    	c = new USBCamera("cam0");
+		        c.setBrightness(7);
+		        CameraServer.getInstance().startAutomaticCapture(c);
+			}
+    	} catch(Exception e){}
 		Scheduler.getInstance().run();
 	}
 
@@ -103,6 +128,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	Components.cameraServoAngle.setAngle(Constants.shootAngle);
         autonomousCommand = (Command) chooser.getSelected();
+        Components.shifter.set(Value.kForward);
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -123,7 +149,10 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+    	Components.shifter.set(Value.kForward);
         driveSystem.update();
+        SmartDashboard.putNumber("XxX_Left_Distance_XxX" , Components.leftDriveEncoder.getDistance());
+        SmartDashboard.putNumber("XxX_Right_Distance_XxX" , Components.rightDriveEncoder.getDistance());
         Scheduler.getInstance().run();
     }
 
@@ -149,6 +178,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("XxX_Left_Distance_XxX" , Components.leftDriveEncoder.getDistance());
         SmartDashboard.putNumber("XxX_Right_Distance_XxX" , Components.rightDriveEncoder.getDistance());
+        SmartDashboard.putNumber("Pressure", pressure.readPressure());
         
 //        Components.cameraServoAngle.setAngle(Preferences.getInstance().getDouble("angle", 0));
         
@@ -183,6 +213,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("accelX", driveSystem.getAccel().getX());
 		SmartDashboard.putNumber("accelY", driveSystem.getAccel().getY());
 		SmartDashboard.putNumber("accel", driveSystem.getAccel().getZ());
+		
 //		if(Components.systemStick.getPOV() == -1)
 ////			Components.bigArmPiston.OffCommand().start();
 //			Components.bigArmPiston.set(Value.kOff);

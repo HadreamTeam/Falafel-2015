@@ -20,7 +20,7 @@ public class AutonomousCrossTerrain extends CommandGroup {
     	addSequential(Robot.driveSystem.AutoDrive(myDistance, myDistance));
     	Robot.driveSystem.setPIDLeftDistance(Constants.driveDistanceLeftPID, Constants.driveOutputRange);
     	Robot.driveSystem.setPIDRightDistance(Constants.driveDistanceRightPID, Constants.driveOutputRange);
-    	addParallel(new ShootAndEject());
+//    	addParallel(new ShootAndEject());
         //      addSequential(new Command2());
         // these will run in order.
 

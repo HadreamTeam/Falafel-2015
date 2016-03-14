@@ -24,7 +24,7 @@ public class AutonomousCrossBlock extends CommandGroup {
     	Robot.driveSystem.setPIDLeftDistance(Constants.driveDistanceLeftPID, Constants.driveOutputRange);
     	Robot.driveSystem.setPIDRightDistance(Constants.driveDistanceRightPID, Constants.driveOutputRange);
     	
-    	addParallel(new ShootAndEject());
+//    	addParallel(new ShootAndEject());
     	
     }
 }
